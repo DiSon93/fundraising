@@ -1,0 +1,112 @@
+.token_amount {
+  .select_option {
+    display: flex;
+  }
+  .overview {
+    position: relative;
+    margin-left: 15px;
+    .ant-input {
+      border: 1px solid #e0e0e0;
+      box-sizing: border-box;
+      border-radius: 32px;
+      height: 40px;
+      padding: 4px 0px;
+      padding-left: 50px;
+      font-size: 16px;
+      width: 200px;
+    }
+    .ant-calendar-picker-icon {
+      font-size: 16px;
+      padding-right: 170px;
+      color: $green-black-01;
+    }
+    img {
+      position: absolute;
+      right: 16px;
+      top: 11px;
+    }
+  }
+  .type_options {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .vs-table {
+    tr td {
+      font-size: 16px;
+      line-height: 19px;
+      font-weight: 500;
+    }
+
+    tr th {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 24px;
+      background: #e2ffee;
+      color: $green-black-01;
+    }
+    tr td:nth-child(1) {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      img {
+        margin-right: 10px;
+      }
+    }
+    tr td:nth-child(3) {
+      .action {
+        display: flex;
+        .deposit {
+          margin-left: 40px;
+        }
+      }
+      a {
+        color: $green-black-01;
+      }
+    }
+    tr td:nth-child(4) {
+      a {
+        color: $green-black-01;
+      }
+    }
+  }
+  .vs-table__footer {
+    .paginator {
+      position: relative;
+      .pageAmount {
+        position: absolute;
+        left: 0;
+        top: 5px;
+      }
+      .numberPage {
+        position: absolute;
+        right: 0;
+        top: 0;
+        .ant-select {
+          width: 80px !important;
+        }
+      }
+    }
+  }
+  .vs-table__tr__expand {
+    .vs-table {
+      tr td {
+        color: $grey-black-03;
+        padding: 4px 0px 4px 12px;
+      }
+      tr td:nth-child(1) {
+        font-weight: 500;
+      }
+      tr td:nth-child(6) {
+        a {
+          color: $green-black-01;
+        }
+      }
+      .adjust {
+        color: $green-black-01;
+      }
+    }
+  }
+}

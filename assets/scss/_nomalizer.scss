@@ -1,0 +1,57 @@
+.vs-button--active {
+  outline: none;
+  border: none;
+}
+.vs-button:focus {
+  outline: none;
+  border: none;
+}
+
+.home-enter-active {
+  transition: opacity 0.5s;
+}
+.home-leave-active {
+  transition: opacity 0.1s;
+}
+.home-enter,
+.home-leave-active {
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.8s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+// .vs-sidebar-content{
+//   width: 234px!important;
+//   border-radius: 0px!important;
+//   height: 100%!important;
+// }
+.multiselect{
+  width: 250px!important;
+  .multiselect__content-wrapper ul li .multiselect__option{
+    // border-radius: 50px!important;
+    display: flex;
+    align-items: center;
+    img{
+      margin-right: 10px;
+    }
+  }
+  .multiselect__single{
+    img{
+      margin-right: 10px;
+    }
+  }
+  .multiselect__tags{
+    border-radius: 50px!important;
+  }
+  .multiselect__content-wrapper{
+    border-top: 1px solid rgb(232, 232, 232);
+    border-radius: 15px;;
+  }
+}

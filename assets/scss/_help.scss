@@ -1,0 +1,38 @@
+.help {
+  .ant-input-affix-wrapper .ant-input {
+    height: 50px !important;
+    border: 1px solid #bdbdbd;
+    box-sizing: border-box;
+    border-radius: 50px;
+    padding-left: 30px;
+  }
+  .ant-input-suffix i {
+    font-size: 20px !important;
+  }
+}
+.submit_ticket{
+  .ant-input-affix-wrapper .ant-input {
+    height: 50px !important;
+    border: 1px solid #bdbdbd;
+    box-sizing: border-box;
+    border-radius: 50px;
+    padding-left: 30px;
+  }
+  .ant-input-search.ant-input-affix-wrapper{
+    width: 100%!important;
+  }
+  .vs-button{
+    margin: 0!important;
+  }
+  .ant-form{
+    .ant-input,.ant-select-selection{
+      border-radius: 50px!important;
+      height: 40px!important;
+      padding: 4px 20px;
+    }
+    #submit-ticket_description{
+      height: 200px!important;
+      border-radius: 20px!important;
+    }
+  }
+}

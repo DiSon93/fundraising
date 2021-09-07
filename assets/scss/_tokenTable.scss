@@ -1,0 +1,100 @@
+.token_table{
+    .vs-table {
+        tr td {
+          border-top: 0.5px solid #e5e5e5;
+          font-size: 16px;
+          line-height: 19px;
+          font-weight: 500;
+        }
+        tr th {
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 24px;
+          background: #e2ffee;
+          color: $green-black-01;
+        }
+        tr td:nth-child(1) {
+          font-weight: 500;
+          font-size: 24px;
+          line-height: 24px;
+          img{
+            margin: -10px 0;
+          }
+        }
+        tr td:nth-child(2) {
+          .icoming {
+            color: $orange-text-01;
+          }
+          .tokensale {
+            color: $green-black-01;
+          }
+          .finish {
+            color: $red-text-01;
+          }
+        }
+        tr td:nth-child(3), tr td:nth-child(4){
+            color: $green-black-01
+        }
+        .con-content {
+          display: flex;
+          padding: 0 6%;
+          .content_more {
+            width: 65%;
+          }
+          .btn_accept {
+            width: 35%;
+          }
+          .social_netwwork {
+            margin: 10px 0px;
+            display: flex;
+            // justify-content: space-between;
+            i {
+              color: $green-black-01 !important;
+              margin-right: 20px;
+            }
+          }
+          .quote {
+            text-align: justify;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 19px;
+            margin-bottom: 10px;
+          }
+          .btn_accept {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+          }
+          .btn_started {
+            background: linear-gradient(90.62deg, #0b9985 -63.29%, #0b9985 100%);
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 0px 20px 2px;
+          }
+        }
+        .open_row{
+          display: flex;
+          justify-content: space-between;
+        }
+      
+      }
+      .vs-table__footer{
+          .paginator{
+              position: relative;
+              .pageAmount{
+                  position: absolute;
+                  left: 0;
+                  top: 5px;
+              }
+              .numberPage{
+                position: absolute;
+                right: 0;
+                top: 0;
+                .ant-select{
+                    width: 80px!important;
+                }
+              }
+          }
+        }
+}

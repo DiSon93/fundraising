@@ -1,0 +1,30 @@
+{
+  "name": "fundraising",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "animate.css": "^4.1.1",
+    "ant-design-vue": "^1.7.6",
+    "apexcharts": "^3.28.1",
+    "boxicons": "^2.0.9",
+    "chart.js": "^2.9.4",
+    "core-js": "^3.15.1",
+    "moment": "^2.29.1",
+    "nuxt": "^2.15.7",
+    "vue-chartjs": "^3.5.1",
+    "vue-multiselect": "^2.1.6",
+    "vuesax": "^4.0.1-alpha.25"
+  },
+  "devDependencies": {
+    "fibers": "^5.0.0",
+    "sass": "^1.38.1",
+    "sass-loader": "^10.2.0"
+  }
+}

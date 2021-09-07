@@ -1,0 +1,13 @@
+.categories{
+    .ant-table-tbody > tr > td{
+        border-bottom:  0px solid #e8e8e8!important;
+        padding: 8px 16px;
+    }
+    .ant-table-thead{
+        display: none;
+    }
+    .ant-table-row-level-0{
+        color: $green-black-01;
+        font-weight: 700;
+    }
+}

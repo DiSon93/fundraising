@@ -1,0 +1,18 @@
+.token-sale{
+    .ant-input-affix-wrapper {
+        .ant-input {
+            height: 40px !important;
+            border: 1px solid #bdbdbd;
+            box-sizing: border-box;
+            border-radius: 50px;
+            padding-left: 30px;
+            width: 500px;
+          }
+    }
+    .ant-input-search{
+        width: 500px!important;
+    }
+      .ant-input-suffix i {
+        font-size: 20px !important;
+      }
+}
