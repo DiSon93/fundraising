@@ -194,6 +194,7 @@ export default {
         if (!err) {
           console.log("Received values of form: ", values);
         }
+        setTimeout(() => this.$router.push("/dashboard"), 1500);
       });
     },
     handleConfirmBlur(e) {

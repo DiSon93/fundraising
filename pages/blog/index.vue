@@ -302,6 +302,7 @@ export default {
       font-size: 24px;
       line-height: 132%;
       margin: 30px 0;
+      margin-left: 20px;
     }
     .news_item {
       display: flex;

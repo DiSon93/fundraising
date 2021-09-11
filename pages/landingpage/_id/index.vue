@@ -34,14 +34,14 @@
               </a-col>
             </a-row>
             <a-row class="detail">
-              <a-col :span="14">
+              <a-col :span="16">
                 <div class="label">Access Type:</div>
                 <div class="label">Soft Cap:</div>
                 <div class="label">Hard Cap:</div>
                 <div class="label">Min - Max. Contribution:</div>
                 <div class="label">Address Contract:</div>
               </a-col>
-              <a-col :span="10">
+              <a-col :span="8">
                 <div>Level</div>
                 <div>$1000</div>
                 <div>$5000</div>
@@ -52,108 +52,119 @@
           </div>
         </div>
       </a-col>
-      <a-col
-        :sm="17"
-        class="infomation"
-        v-bind:class="{ incoming: tag == 'incoming', finish: tag == 'finish' }"
-      >
-        <div class="heading">
-          <div class="coin">
-            <img src="@image/layouts/incoming_logo.png" alt="" />
-            CloudZ
+      <a-col :sm="17">
+        <div
+          class="infomation"
+          v-bind:class="{ incoming: tag == 'incoming', finish: tag == 'finish' }"
+        >
+          <div class="heading">
+            <div class="coin">
+              <img src="@image/layouts/incoming_logo.png" alt="" />
+              CloudZ
+            </div>
+            <div class="tag" v-if="tag == 'incoming'">
+              <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
+            </div>
+            <div class="tag" v-if="tag == 'sale'">
+              <img src="@image/icons/incoming_tag_sale.svg" alt="" id="tag_img" />
+            </div>
+            <div class="tag" v-if="tag == 'finish'">
+              <img src="@image/icons/incoming_tag_finish.svg" alt="" id="tag_img" />
+            </div>
           </div>
-          <div class="tag" v-if="tag == 'incoming'">
-            <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
+          <div class="content">
+            Babylons is a next generation NFT marketplace with low-cost minting, weekly
+            rewards, physical art gallery connections and and a DAO governance that puts
+            the power in the hands of the community. Babylons is a next generation NFT
+            marketplace with low-cost minting, weekly rewards, physical art gallery
+            connections and and a DAO governance that puts the power in the hands of the
+            community.
           </div>
-          <div class="tag" v-if="tag == 'sale'">
-            <img src="@image/icons/incoming_tag_sale.svg" alt="" id="tag_img" />
-          </div>
-          <div class="tag" v-if="tag == 'finish'">
-            <img src="@image/icons/incoming_tag_finish.svg" alt="" id="tag_img" />
-          </div>
-        </div>
-        <div class="content">
-          Babylons is a next generation NFT marketplace with low-cost minting, weekly
-          rewards, physical art gallery connections and and a DAO governance that puts the
-          power in the hands of the community. Babylons is a next generation NFT
-          marketplace with low-cost minting, weekly rewards, physical art gallery
-          connections and and a DAO governance that puts the power in the hands of the
-          community.
-        </div>
-        <div class="detail">
-          <div class="token">
-            <div class="title">Token</div>
-            <div>
-              <div class="items">
-                <a-row>
-                  <a-col :span="12">
-                    <div class="label">Token:</div>
-                    <div class="label">Type:</div>
-                    <div class="label">Total Supply:</div>
-                    <div class="label">Initial Supply:</div>
-                    <div class="label">Token Listing:</div>
-                  </a-col>
-                  <a-col :span="12">
-                    <div>CloudZ</div>
-                    <div>TRC20</div>
-                    <div>3,685,500 Cloudz</div>
-                    <div>4554.1545 Cloudz</div>
-                    <div>17 Aug</div>
-                  </a-col>
-                </a-row>
+          <div class="detail">
+            <div class="token">
+              <div class="title">Token</div>
+              <div>
+                <div class="items">
+                  <a-row>
+                    <a-col :span="12">
+                      <div class="label">Token:</div>
+                      <div class="label">Type:</div>
+                      <div class="label">Total Supply:</div>
+                      <div class="label">Initial Supply:</div>
+                      <div class="label">Token Listing:</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div>CloudZ</div>
+                      <div>TRC20</div>
+                      <div>3,685,500 Cloudz</div>
+                      <div>4554.1545 Cloudz</div>
+                      <div>17 Aug</div>
+                    </a-col>
+                  </a-row>
+                </div>
+              </div>
+            </div>
+            <div class="distribution">
+              <div class="title">Distributon</div>
+              <div>
+                <div class="items">
+                  <a-row>
+                    <a-col :span="8">
+                      <div class="label">Distribution:</div>
+                      <div class="label">Vesting</div>
+                    </a-col>
+                    <a-col :span="16">
+                      <div>Claimed on Coinpad</div>
+                      <div>20% at TGE, and 20% each 2 weeks</div>
+                    </a-col>
+                  </a-row>
+                </div>
               </div>
             </div>
           </div>
-          <div class="distribution">
-            <div class="title">Distributon</div>
-            <div>
-              <div class="items">
-                <a-row>
-                  <a-col :span="8">
-                    <div class="label">Distribution:</div>
-                    <div class="label">Vesting</div>
-                  </a-col>
-                  <a-col :span="16">
-                    <div>Claimed on Coinpad</div>
-                    <div>20% at TGE, and 20% each 2 weeks</div>
-                  </a-col>
-                </a-row>
+          <div class="time_remaining" v-if="tag != 'finish'">
+            <div class="title">Time Remaining</div>
+            <div class="schedule">
+              <div class="number">
+                10
+                <div class="times">Day</div>
+              </div>
+              <div>:</div>
+              <div class="number">
+                10
+                <div class="times">Hours</div>
+              </div>
+              <div>:</div>
+              <div class="number">
+                10
+                <div class="times">Minutes</div>
+              </div>
+              <div>:</div>
+              <div class="number">
+                10
+                <div class="times">Seconds</div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="time_remaining">
-          <div class="title">Time Remaining</div>
-          <div class="schedule">
-            <div class="number">
-              10
-              <div class="times">Day</div>
-            </div>
-            <div>:</div>
-            <div class="number">
-              10
-              <div class="times">Hours</div>
-            </div>
-            <div>:</div>
-            <div class="number">
-              10
-              <div class="times">Minutes</div>
-            </div>
-            <div>:</div>
-            <div class="number">
-              10
-              <div class="times">Seconds</div>
-            </div>
+          <div v-if="tag == 'incoming'">
+            <vs-button
+              class="btn_started"
+              color="rgb(59,222,200)"
+              @click="$router.push('/landingpage/form')"
+            >
+              Register
+            </vs-button>
           </div>
-        </div>
-        <div>
-          <vs-button
-            class="btn_started"
-            color="rgb(59,222,200)"
-            @click="$router.push('/register')"
-          >
-            Invest Now
-          </vs-button>
+          <div v-if="tag == 'sale'">
+            <vs-button
+              class="btn_started"
+              color="rgb(59,222,200)"
+              @click="$router.push('/landingpage/buyToken')"
+            >
+              Invest Now
+            </vs-button>
+          </div>
+          <div class="finish_overlay" v-if="tag == 'finish'"></div>
         </div>
       </a-col>
     </a-row>
@@ -238,6 +249,7 @@ export default {
         color: $green-black-01;
         font-weight: 700;
       }
+      margin-bottom: 100px;
     }
   }
   .infomation {
@@ -247,6 +259,7 @@ export default {
     box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.09);
     border-radius: 20px;
     border: 1px solid $green-black-02;
+    height: 100% !important;
     .heading {
       display: flex;
       justify-content: space-between;
@@ -343,7 +356,7 @@ export default {
       font-size: 24px;
       line-height: 24px;
       padding: 0 20px;
-      margin: 20px auto -10px;
+      margin: 30px auto 80px;
     }
   }
   .incoming {
@@ -361,6 +374,9 @@ export default {
     background: linear-gradient(0deg, rgba(235, 87, 87, 0.05), rgba(235, 87, 87, 0.05)),
       rgba(251, 251, 251, 0.93);
     border: 1px solid #eb5757;
+  }
+  .finish_overlay {
+    height: 150px;
   }
 }
 </style>

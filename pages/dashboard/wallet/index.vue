@@ -101,7 +101,7 @@ export default {
     display: flex;
     margin: 0 10px;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     .vs-button {
       width: 150px;
       height: 32px;

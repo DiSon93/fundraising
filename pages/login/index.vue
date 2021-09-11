@@ -59,7 +59,7 @@
         <vs-button
           class="btn_started"
           :active="active == 3"
-          @click="active = 3"
+          @click="redirectLink"
           color="rgb(59,222,200)"
         >
           Log in
@@ -116,6 +116,9 @@ export default {
         loading.close();
         this.hasOpenLoading = false;
       }, 1000);
+    },
+    redirectLink() {
+      this.active = 3;
     },
   },
 };

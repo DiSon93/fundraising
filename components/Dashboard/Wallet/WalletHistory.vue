@@ -215,9 +215,6 @@ export default {
     },
   },
   methods: {
-    handleChange(value) {
-      console.log(`selected ${value}`);
-    },
     setTodaySelect() {
       this.today = moment().format("MMM Do YY");
     },

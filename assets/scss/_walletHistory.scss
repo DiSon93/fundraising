@@ -37,6 +37,16 @@
           line-height: 40px;
           margin-left: 36px;
           font-size: 16px;
+          .ant-select-selection-selected-value{
+            img{
+                width: 25px;
+                height: 25px;
+                margin-left: -40px;
+                margin-top: -5px;
+                z-index: 99;
+            }
+            margin-left: 10px;
+        }
         }
       }
       .ant-select-arrow{
@@ -136,14 +146,4 @@
     }
     display: flex;
     align-items: center;
-}
-.ant-select-selection-selected-value{
-    img{
-        width: 25px;
-        height: 25px;
-        margin-left: -40px;
-        margin-top: -5px;
-        z-index: 99;
-    }
-    margin-left: 10px;
 }

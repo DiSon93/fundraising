@@ -27,6 +27,16 @@
         <img src="@image/layouts/team_02.svg" alt="" />
       </a-col>
     </a-row>
+    <a-divider></a-divider>
+    <div class="social_media">
+      <div class="app">
+        <span>Share Now:</span>
+        <img src="@image/icons/fa.svg" alt="" />
+        <img src="@image/icons/twitter.svg" alt="" />
+        <img src="@image/icons/E-mail.svg" alt="" />
+        <img src="@image/icons/tele.svg" alt="" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -75,6 +85,23 @@ export default {};
       font-size: 16px;
       line-height: 24px;
       color: $green-black-01;
+    }
+  }
+  .social_media {
+    display: flex;
+    justify-content: right;
+
+    .app {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 24px;
+      img {
+        margin-left: 20px;
+        width: 54px;
+        height: 54px;
+      }
     }
   }
 }

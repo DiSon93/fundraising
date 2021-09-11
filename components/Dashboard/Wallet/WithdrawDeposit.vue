@@ -40,16 +40,20 @@
           </vs-td>
           <vs-td>
             <div class="action">
-              <a href="javascript:;"
+              <a href="javascript:;" @click="$router.push('/dashboard/wallet/withdraw')"
                 ><img src="@image/icons/withdraw.svg" alt="" /> Widthdraw</a
               >
-              <a href="javascript:;" class="deposit">
+              <a
+                href="javascript:;"
+                class="deposit"
+                @click="$router.push('/dashboard/wallet/deposit')"
+              >
                 <img src="@image/icons/deposit.svg" alt="" /> Deposit
               </a>
             </div>
           </vs-td>
           <vs-td>
-            <a href="javascript:;">
+            <a href="https://bscscan.com/">
               <img src="@image/icons/done.svg" alt="" /> {{ tr.view }}
             </a>
           </vs-td>

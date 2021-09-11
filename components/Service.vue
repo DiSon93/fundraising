@@ -14,7 +14,7 @@
     </div>
     <div class="social">
       <img src="@image/icons/facebook.svg" alt="" />
-      <img src="@image/icons/twitter.svg" alt="" />
+      <img src="@image/icons/twi.svg" alt="" />
       <img src="@image/icons/telegram.svg" alt="" />
       <img src="@image/icons/frog.svg" alt="" />
     </div>

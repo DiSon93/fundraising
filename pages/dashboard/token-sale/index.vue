@@ -81,8 +81,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 1"
-                    @click="active = 1"
+                    @click="$router.push('/landingpage/incoming')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -137,8 +136,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 2"
-                    @click="active = 2"
+                    @click="$router.push('/landingpage/incoming')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -193,8 +191,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 3"
-                    @click="active = 3"
+                    @click="$router.push('/landingpage/incoming')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -252,8 +249,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 4"
-                    @click="active = 4"
+                    @click="$router.push('/landingpage/sale')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -308,8 +304,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 5"
-                    @click="active = 5"
+                    @click="$router.push('/landingpage/sale')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -364,8 +359,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 6"
-                    @click="active = 6"
+                    @click="$router.push('/landingpage/sale')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -423,8 +417,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 4"
-                    @click="active = 4"
+                    @click="$router.push('/landingpage/finish')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -479,8 +472,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 5"
-                    @click="active = 5"
+                    @click="$router.push('/landingpage/finish')"
                     color="rgb(59,222,200)"
                   >
                     Join Now
@@ -535,8 +527,7 @@
                   </div>
                   <vs-button
                     class="btn_join"
-                    :active="active == 6"
-                    @click="active = 6"
+                    @click="$router.push('/landingpage/finish')"
                     color="rgb(59,222,200)"
                   >
                     Join Now

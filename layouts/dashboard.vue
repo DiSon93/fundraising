@@ -37,7 +37,7 @@
                 <div class="text">Wallet</div>
               </div>
             </NuxtLink>
-            <NuxtLink to="/dashboard">
+            <NuxtLink to="/dashboard/rewarts">
               <div
                 class="item"
                 @click="activeRoute = 4"
@@ -47,7 +47,7 @@
                 <div class="text">Rewarts</div>
               </div>
             </NuxtLink>
-            <NuxtLink to="/dashboard">
+            <NuxtLink to="/dashboard/account">
               <div
                 class="item"
                 @click="activeRoute = 5"
@@ -126,6 +126,10 @@ export default {
       this.activeRoute = 2;
     } else if (this.$route.path == "/dashboard/wallet") {
       this.activeRoute = 3;
+    } else if (this.$route.path == "/dashboard/rewarts") {
+      this.activeRoute = 4;
+    } else if (this.$route.path == "/dashboard/account") {
+      this.activeRoute = 5;
     } else {
       this.active = 0;
     }

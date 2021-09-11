@@ -1,0 +1,100 @@
+.rewartsTable {
+  .vs-table {
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    tr td {
+      font-size: 16px;
+      line-height: 19px;
+      font-weight: 500;
+    }
+    tr td:nth-child(4) {
+      .status_active {
+        color: #2f80ed;
+      }
+      .status_bonus {
+        color: #219653;
+      }
+    }
+    tr td:nth-child(5){
+        img{
+            margin-top: -4px;
+        }
+        .status_active {
+            color: $green-black-01;
+          
+          }
+          .status_pending{
+              color: $grey-black-02;
+          }
+          .status_bonus {
+            color: #000;
+          }
+    }
+
+    tr th {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 24px;
+      background: #e2ffee;
+      color: $green-black-01;
+    }
+    tr th:first-child{
+      padding-left: 50px;
+    }
+    tr td:nth-child(1) {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      padding-left: 50px;
+    }
+    tr td:nth-child(2) {
+      img {
+        margin-right: 10px;
+      }
+    }
+  }
+  .vs-table__footer {
+    background-color: $white-text-01;
+    margin-top: 10px;
+    .paginator {
+      position: relative;
+      .pageAmount {
+        position: absolute;
+        left: 0;
+        top: 5px;
+        font-weight: 500;
+        font-size: 16px;
+      }
+      .numberPage {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-weight: 500;
+        font-size: 16px;
+        .ant-select {
+          width: 80px !important;
+        }
+      }
+    }
+  }
+  .vs-table__tr__expand {
+    .vs-table {
+      tr td {
+        color: $grey-black-03;
+        padding: 4px 0px 4px 12px;
+      }
+      tr td:nth-child(1) {
+        font-weight: 500;
+      }
+      tr td:nth-child(6) {
+        a {
+          color: $green-black-01;
+        }
+      }
+      .adjust {
+        color: $green-black-01;
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.wallet_deposit{
+    .ant-select{
+        width: 470px;
+        border-radius: 50px;
+        .ant-select-selection{
+            height: 40px;
+        border-radius: 50px;
+
+        }
+        .ant-select-selection__rendered{
+            height: 40px;
+            line-height: 40px;
+            margin-left: 10px;
+            .ant-select-selection-selected-value{
+                padding-left: 41px;
+                img{
+                    width: 25px;
+                    height: 25px;
+                    margin-left: -40px;
+                    margin-top: -5px;
+                    z-index: 99;
+                    margin-right: 5px;
+                }
+                margin-left: 10px;
+            }
+        }
+    }
+    .select_network{
+        .ant-select{
+            .ant-select-selection__rendered{
+                margin-left: 20px;
+                .ant-select-selection-selected-value{
+                margin-left: 0px;
+                }
+            }
+        }
+
+    }
+}
+#select_deposit{
+    img{
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    display: flex;
+    align-items: center;
+}
