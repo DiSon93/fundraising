@@ -50,7 +50,7 @@
             <div class="overlay">-</div>
           </div>
           <div class="add_currency">
-            <img src="@image/icons/addCurrency.svg" alt="" />
+            <img src="@image/icons/addCurrent.svg" alt="" />
             <div class="add">Add Currency</div>
           </div>
         </div>
