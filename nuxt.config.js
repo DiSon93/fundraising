@@ -31,7 +31,6 @@ export default {
   plugins: [
     '@/plugins/antd-ui',
    "@/plugins/vuesax-ui.js",
-   { src: '@/plugins/VueQrCodeReader.js', mode: 'client' }
 
   ],
 
