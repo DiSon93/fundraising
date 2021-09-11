@@ -93,7 +93,7 @@
           <div class="add">Add Currency</div>
         </div>
       </div>
-      <div class="chart_token">
+      <div class="chart_token token_token">
         <ChartToken />
       </div>
     </div>
