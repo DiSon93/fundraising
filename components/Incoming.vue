@@ -2,7 +2,9 @@
   <!-- <Lazy> -->
   <div class="incoming">
     <div class="title">Incoming Project</div>
-    <div class="token">Tokens distributed to over 350,000 network participants</div>
+    <div class="token">
+      $2M+ invested by 10,000+ investors in over 250 completed transactions.
+    </div>
     <div class="incoming_info">
       <a-row>
         <a-col :xs="24" :sm="8">
@@ -356,10 +358,10 @@ export default {
   text-align: center;
   .title {
     font-weight: bold;
-    font-size: 36px;
-    line-height: 43px;
+    font-size: 48px;
+    line-height: 57px;
     margin: 10px 0px;
-    color: $black-text-03;
+    color: $green-black-01;
   }
   .token {
     font-weight: 500;

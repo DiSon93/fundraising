@@ -1,6 +1,6 @@
 <template>
   <div class="coinpad_platform">
-    <div class="title">Previously on the Coinpad Platform</div>
+    <div class="title">Top Projects</div>
 
     <div class="center">
       <vs-table v-model="selected">
@@ -144,12 +144,13 @@ export default {
   background: $background;
   .title {
     font-weight: bold;
-    font-size: 36px;
-    line-height: 43px;
+    font-size: 48px;
+    line-height: 57px;
     display: flex;
     align-items: center;
     margin-bottom: 30px;
     justify-content: center;
+    color: $green-black-01;
   }
 }
 .vs-table {

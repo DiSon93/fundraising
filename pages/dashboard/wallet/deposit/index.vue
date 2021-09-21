@@ -1,10 +1,22 @@
 <template>
   <div class="wallet_deposit">
     <div class="myWallet_selected">
-      <vs-button success flat :active="active == 1" @click="active = 1" color="#6FCF97">
+      <vs-button
+        success
+        flat
+        :active="active == 1"
+        color="#6FCF97"
+        @click="redirectWallet"
+      >
         My Wallet
       </vs-button>
-      <vs-button success flat :active="active == 2" @click="active = 2" color="#6FCF97">
+      <vs-button
+        success
+        flat
+        :active="active == 2"
+        @click="redirectReport"
+        color="#6FCF97"
+      >
         Report
       </vs-button>
     </div>
@@ -89,7 +101,7 @@
 
 <script>
 import QrcodeVue from "qrcode.vue";
-
+import Wallet from "../index.vue";
 export default {
   layout: "dashboard",
   transition: {
@@ -101,7 +113,7 @@ export default {
     // Qrcode,
   },
   data: () => ({
-    active: 1,
+    active: 0,
     options: "",
     value: "https://example.com",
     size: 150,
@@ -109,6 +121,21 @@ export default {
   methods: {
     handleChange(value) {
       console.log(`selected ${value}`);
+    },
+    redirectWallet() {
+      this.$router.push("/dashboard/wallet");
+      this.active = 1;
+    },
+    redirectReport() {
+      //sử dụng store để truyền props
+      this.$router.push({
+        path: "/dashboard/wallet",
+        components: Wallet,
+        params: {
+          route: 2,
+        },
+      });
+      this.active = 2;
     },
   },
 };

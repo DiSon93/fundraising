@@ -114,7 +114,7 @@ export default {
     Service,
   },
   data: () => ({
-    active: 1,
+    active: 0,
     fixed: false,
     side: "home",
     activeRoute: 1,

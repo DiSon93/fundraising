@@ -186,6 +186,7 @@ export default {
 @import "@asset/variables.scss";
 .blog {
   padding: 0 5%;
+  margin-top: 10px;
   .carousel {
     border-radius: 10px;
     overflow: hidden;

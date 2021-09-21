@@ -1,7 +1,7 @@
 <template>
   <div class="privacy">
     <a-row>
-      <a-col :xs="24" :sm="12" style="padding-right: 15px">
+      <a-col :xs="24" :sm="14" style="padding-right: 45px">
         <div>
           This site is operated by Amalgamated Token Services Inc. through its
           wholly-owned subsidiary, CoinList Services, LLC (together, “CoinList”), which is
@@ -34,7 +34,7 @@
           conflicts, and services provided.
         </div>
       </a-col>
-      <a-col :xs="24" :sm="12" style="padding-left: 15px">
+      <a-col :xs="24" :sm="10">
         <div>
           All cryptocurrency trading and related services are provided by CoinList Markets
           LLC (“CoinList Markets”) NMLS #1785267, an affiliate of CoinList and a Money
@@ -75,11 +75,12 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+@import "@asset/variables.scss";
 .privacy {
-  padding: 0 10%;
-  margin-top: 30px;
+  padding: 30px 10%;
   display: flex;
   text-align: justify;
   align-items: center;
+  background-color: $background-footer;
 }
 </style>

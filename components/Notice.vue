@@ -3,13 +3,12 @@
     <div class="btn_select">
       <vs-button
         class="btn_started"
-        :active="active == 1"
-        @click="active = 1"
         color="rgb(59,222,200)"
+        @click="$router.push('/register')"
       >
         Get Started
       </vs-button>
-      <vs-button shadow :active="active == 2" @click="active = 2" class="btn_learnMore">
+      <vs-button shadow @click="$router.push('/help')" class="btn_learnMore">
         Learn More
       </vs-button>
     </div>
