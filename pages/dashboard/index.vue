@@ -15,7 +15,7 @@
           <div class="money">12.000 <span class="curency">USDT</span></div>
         </div>
       </div>
-      <div>
+      <!-- <div>
         <multiselect
           v-model="value"
           placeholder=""
@@ -39,11 +39,11 @@
             </div>
           </template>
         </multiselect>
-      </div>
+      </div> -->
     </div>
     <div class="token_chart">
-      <div class="title">Chart Token Invested</div>
-      <div class="money_token">
+      <div class="title">Total Porforlio</div>
+      <!-- <div class="money_token">
         <div class="token token_active">
           <img src="@image/icons/token_01.svg" alt="" />
           <div class="detail">
@@ -92,7 +92,7 @@
           <img src="@image/icons/addCurrent.svg" alt="" />
           <div class="add">Add Currency</div>
         </div>
-      </div>
+      </div> -->
       <div class="chart_token token_token">
         <ChartToken />
       </div>
@@ -162,6 +162,8 @@ export default {
     justify-content: space-between;
     .crypto {
       display: flex;
+      justify-content: center;
+      width: 100%;
       .balance {
         border: 0.975833px solid #27ae60;
         box-sizing: border-box;

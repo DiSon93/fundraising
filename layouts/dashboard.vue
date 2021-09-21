@@ -162,7 +162,7 @@ export default {
       top: 0px;
       z-index: 999;
     }
-    width: 234px;
+    width: 234px !important;
     min-height: 600px;
     // background-color: $green-black-01;
     border: 1px solid #e4e4e4;
@@ -187,7 +187,7 @@ export default {
         .text {
           margin: auto 0;
           font-weight: 500;
-          font-size: 18px;
+          font-size: 18px !important;
           line-height: 24px;
           color: $green-black-01;
         }

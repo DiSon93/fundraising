@@ -312,7 +312,7 @@ export default {
         justify-content: right;
         .figure {
           font-weight: bold;
-          font-size: 14px;
+          font-size: 14px !important;
           line-height: 20px;
           letter-spacing: 0.25px;
           color: $orange-text-01;
@@ -332,6 +332,10 @@ export default {
           padding: 8px 16px;
           span {
             margin-left: 10px;
+          }
+          img {
+            width: 13.87px;
+            height: 13.87px;
           }
         }
       }
