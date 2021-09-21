@@ -76,6 +76,19 @@ export default {
       this.active = 0;
     }
   },
+  watch: {
+    $route(to, from) {
+      if (this.$route.path == "/") {
+        this.active = 1;
+      } else if (this.$route.path == "/blog" || this.$route.path == "/blog/1") {
+        this.active = 2;
+      } else if (this.$route.path == "/register") {
+        this.active = 3;
+      } else {
+        this.active = 0;
+      }
+    },
+  },
   methods: {
     redirectHome() {
       this.$router.push("/");
@@ -102,7 +115,7 @@ export default {
   z-index: 99;
   .logo {
     position: absolute;
-    left: 10%;
+    left: 15%;
     img {
       z-index: 99;
       opacity: 1;
@@ -144,7 +157,6 @@ export default {
   padding: 10px 10%;
   justify-content: space-between;
   background-color: $black-text-03;
-  margin-top: 60px;
   .copyright {
     font-weight: 500;
     font-size: 18px;

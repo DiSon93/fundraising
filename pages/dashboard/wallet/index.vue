@@ -81,6 +81,7 @@ export default {
     name: "slide-fade",
     mode: "out-in",
   },
+  name: "Wallet",
   components: {
     WalletPieChart,
     PorfolioChart,
@@ -91,6 +92,9 @@ export default {
   data: () => ({
     active: 1,
   }),
+  mounted() {
+    // this.active = this.$route.params.route ? this.$route.params.route : 1;
+  },
 };
 </script>
 

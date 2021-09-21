@@ -5,7 +5,7 @@
       <div class="right">
         <div class="level">Security Level</div>
         <div class="point" v-for="i in 2" :key="i"></div>
-        <div class="point unactive" v-for="i in 2" :key="i"></div>
+        <div class="point unactive" v-for="j in 2" :key="j"></div>
       </div>
     </div>
     <div class="quote">Please complete for up level your account</div>

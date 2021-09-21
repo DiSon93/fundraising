@@ -1,7 +1,7 @@
 <template>
   <!-- <Lazy> -->
   <div class="market">
-    <div class="market_title">Today's Cryptocurrency Prices by Market Cap</div>
+    <div class="market_title">Daily Price by MarketCap</div>
     <div class="content">
       The global crypto market cap is $1.85T, a
       <span class="highlight">1.83%</span> increase over the last day.
@@ -262,11 +262,12 @@ export default {
   padding: 0 6%;
   .market_title {
     font-weight: bold;
-    font-size: 36px;
-    line-height: 43px;
+    font-size: 48px;
+    line-height: 57px;
     justify-content: center;
     display: flex;
     align-items: center;
+    color: $green-black-01;
   }
   .content {
     font-weight: 500;
@@ -293,8 +294,12 @@ export default {
     font-weight: 500;
     font-size: 16px;
   }
+  tr th:first-child {
+    padding-left: 20px;
+  }
   tr td:first-child {
     font-weight: 700;
+    padding-left: 20px;
     #coin {
       font-weight: 500;
       color: $black-text-05;
@@ -316,9 +321,13 @@ export default {
   tr td:nth-child(4) {
     color: $green-text-01;
   }
+  tr th:nth-child(8) {
+    width: 220px !important;
+  }
   tr td:nth-child(8) {
+    width: 220px !important;
     .chart {
-      width: 250px !important;
+      width: 200px !important;
     }
   }
   .adjust {

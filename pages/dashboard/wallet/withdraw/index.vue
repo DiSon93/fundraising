@@ -1,10 +1,22 @@
 <template>
   <div class="wallet_withdraw">
     <div class="myWallet_selected">
-      <vs-button success flat :active="active == 1" @click="active = 1" color="#6FCF97">
+      <vs-button
+        success
+        flat
+        :active="active == 1"
+        @click="redirectWallet"
+        color="#6FCF97"
+      >
         My Wallet
       </vs-button>
-      <vs-button success flat :active="active == 2" @click="active = 2" color="#6FCF97">
+      <vs-button
+        success
+        flat
+        :active="active == 2"
+        @click="redirectReport"
+        color="#6FCF97"
+      >
         Report
       </vs-button>
     </div>
@@ -140,7 +152,7 @@ export default {
     mode: "out-in",
   },
   data: () => ({
-    active: 1,
+    active: 0,
   }),
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "register" });
@@ -157,6 +169,20 @@ export default {
     },
     handleChange(value) {
       console.log(`selected ${value}`);
+    },
+    redirectWallet() {
+      this.$router.push("/dashboard/wallet");
+      this.active = 1;
+    },
+    redirectReport() {
+      //sử dụng store để truyền props
+      this.$router.push({
+        path: "/dashboard/wallet",
+        params: {
+          route: 2,
+        },
+      });
+      this.active = 2;
     },
   },
 };

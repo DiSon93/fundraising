@@ -1,9 +1,8 @@
 <template>
   <div class="carousel">
     <div class="title_carousel">
-      <div class="content">Buying Bitcoin is cool.</div>
-      <div class="content">You know what's cooler?</div>
-      <div class="content">Buying the next Bitcoin.</div>
+      <div class="content">Most profit, least worry</div>
+      <div class="content_more">Invest now with the most trusted project</div>
       <div class="btn_select">
         <vs-button
           class="btn_started"
@@ -12,7 +11,7 @@
         >
           Get Started
         </vs-button>
-        <vs-button shadow class="btn_learnMore" @click="$router.push('/dashboard')">
+        <vs-button shadow class="btn_learnMore" @click="$router.push('/help')">
           Learn More
         </vs-button>
       </div>
@@ -52,7 +51,7 @@ export default {
     height: 100%;
   }
   .title_carousel {
-    margin-left: 7%;
+    margin-left: 10%;
     width: 50%;
     padding-top: 16%;
     .content {
@@ -61,6 +60,12 @@ export default {
       line-height: 57px;
       color: $green-black-01;
       opacity: 1;
+    }
+    .content_more {
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 43px;
+      width: 450px;
     }
     .btn_select {
       display: flex;
