@@ -14,7 +14,7 @@
     <div v-if="active == 1">
       <WalletPieChart />
       <div class="token_chart">
-        <div class="title">Chart Token Invested</div>
+        <div class="title">Porfolio Token</div>
         <div class="money_token">
           <div class="token token_active">
             <img src="@image/icons/token_01.svg" alt="" />
