@@ -129,56 +129,78 @@
         />
       </a-form-item>
       <a-form-item>
-        <a-input
-          v-decorator="[
-            'referral',
-            { rules: [{ required: true, message: 'Please input referral!' }] },
-          ]"
-          placeholder="Referral (optional)"
-        />
+        <a-input v-decorator="['referral']" placeholder="Referral (optional)" />
       </a-form-item>
       <div class="privacy">
         By creating an account, I agree to the
-        <span class="highlight">Terms of Service</span> and
-        <span class="highlight">Privacy Policy</span> .
+        <a href="javascript:;" @click="$router.push('/terms')"
+          ><span class="highlight">Terms of Service</span></a
+        >
+        and
+        <a href="javascript:;" @click="$router.push('/privacy-policy')"
+          ><span class="highlight">Privacy Policy</span>
+        </a>
+        .
       </div>
       <div class="form_submit">
         <div
           class="g-recaptcha"
           data-sitekey="6Ld9YF0cAAAAAHYqt51D4zOEOkDlgrPu5QV7Kce-"
+          data-callback="myRecaptchaMethod"
+          data-expired-callback="myRecaptchaExpiredMethod"
         ></div>
       </div>
       <a-form-item class="form_submit">
         <vs-button
           class="btn_started"
-          :active="active == 3"
-          @click="active = 3"
           color="rgb(59,222,200)"
+          :disabled="disabled"
+          :loading="loading"
         >
           Create Account
         </vs-button>
       </a-form-item>
       <a-form-item class="login">
         Already have an account?
-        <a class="highlight" href="javascript:;" @click="$router.push('/login')"
-          >Log in</a
-        >
+        <a class="highlight" href="javascript:;" @click="loginWithChoise">Log in</a>
       </a-form-item>
     </a-form>
+    <vs-dialog width="550px" not-center v-model="active" id="register_modal">
+      <template #header>
+        <h4 class="not-margin">Login with another account?</h4>
+      </template>
 
+      <div class="con-content">
+        <p>
+          You recently logged in with one account. Are you ready to <b>Logout</b> and try
+          to login with another account (click <b>Yes</b>) or do you want to continus with
+          pressent acccount (click <b>Cancel</b>)
+        </p>
+      </div>
+
+      <template #footer>
+        <div class="con-footer">
+          <vs-button @click="acceptToLogout" transparent color="#0b9985"> Yes </vs-button>
+          <vs-button @click="active = false" dark transparent> Cancel </vs-button>
+        </div>
+      </template>
+    </vs-dialog>
     <!-- <vs-button @click="handleClickLoading('points')">Open Loading</vs-button> -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       confirmDirty: false,
-      active: 0,
       hasOpenLoading: false,
       types: ["points"],
+      disabled: true,
+      loading: false,
+      active: false,
     };
   },
   beforeCreate() {
@@ -186,15 +208,31 @@ export default {
   },
   mounted() {
     this.handleClickLoading("points");
+    window.myRecaptchaMethod = this.myRecaptchaMethod;
+    window.myRecaptchaExpiredMethod = this.myRecaptchaExpiredMethod;
+  },
+  computed: {
+    ...mapState("auth", ["currentUser", "error", "errorMessage"]),
   },
   methods: {
+    myRecaptchaMethod: function (response) {
+      console.log(response);
+      this.disabled = false;
+    },
+    myRecaptchaExpiredMethod: function () {
+      this.disabled = true;
+
+      // this is google's code verifying the user is human'
+      // that you check with google on the backend.
+    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Received values of form: ", values);
+          this.registerIntoServer(values);
         }
-        setTimeout(() => this.$router.push("/dashboard"), 1500);
+        // setTimeout(() => this.$router.push("/dashboard"), 1500);
       });
     },
     handleConfirmBlur(e) {
@@ -226,6 +264,55 @@ export default {
         loading.close();
         this.hasOpenLoading = false;
       }, 1000);
+    },
+    correctCaptcha() {
+      console.log("response", 123);
+    },
+    async registerIntoServer(user) {
+      this.loading = true;
+      try {
+        await this.$store.dispatch("auth/registerIntoServer", {
+          firstname: user.first_name,
+          lastname: user.last_name,
+          phone: `+${user.prefix} ${user.phone}`,
+          email: user.email,
+          password: user.password,
+          password_confirmation: user.confirm,
+          ref_id: user.referral,
+        });
+        if (this.errorMessage) {
+          this.loading = false;
+          this.openNotification("top-right", "danger", "Error");
+        } else {
+          this.openNotification("top-right", "#0b9985", "Success");
+          this.loading = false;
+          this.$router.push("/login");
+        }
+      } catch {
+        console.log("Error", this.error);
+      }
+    },
+    loginWithChoise() {
+      if (!this.currentUser) {
+        this.$router.push("/login");
+      } else {
+        this.active = true;
+      }
+    },
+    acceptToLogout() {
+      window.localStorage.clear();
+      window.location.reload(true);
+      window.location.replace("login");
+    },
+    openNotification(position = null, color, title) {
+      const noti = this.$vs.notification({
+        flat: true,
+        progress: "auto",
+        color,
+        position,
+        title,
+        text: this.errorMessage ? this.errorMessage : `Register success`,
+      });
     },
   },
 

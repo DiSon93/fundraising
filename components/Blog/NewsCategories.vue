@@ -1,5 +1,5 @@
 <template>
-  <div class="categories">
+  <div class="categories" v-if="data.length != 0">
     <div class="cate_title">Categories</div>
     <a-table
       :columns="columns"
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 const columns = [
   {
     title: "Name",
@@ -67,13 +68,38 @@ export default {
     return {
       data,
       columns,
-      expandedRowKeys: [1, 2],
+      expandedRowKeys: [11, 13],
       pagi: false,
     };
   },
   watch: {
     expandedRowKeys: function () {
       console.log(this.expandedRowKeys);
+    },
+  },
+  computed: {
+    ...mapState("blogs", ["categories"]),
+  },
+  mounted() {
+    this.getNewCategoryList();
+  },
+  methods: {
+    async getNewCategoryList() {
+      try {
+        await this.$store.dispatch("blogs/getCategoryList");
+        console.log("categoryList", this.categories);
+        this.data = this.categories.map((item) => {
+          return {
+            key: item.id,
+            name: item.title,
+            amount: item.total,
+            children: item.children.map((u) => {
+              return { key: u.id, name: u.title, amount: u.total };
+            }),
+          };
+        });
+        console.log("data", this.data);
+      } catch {}
     },
   },
 };

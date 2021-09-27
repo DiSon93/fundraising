@@ -14,7 +14,7 @@
         success
         flat
         :active="active == 2"
-        @click="redirectReport"
+        @click="$router.push({ path: '/dashboard/wallet', params: { id: '2' } })"
         color="#6FCF97"
       >
         Report

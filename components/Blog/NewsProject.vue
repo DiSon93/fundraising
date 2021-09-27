@@ -8,42 +8,17 @@
       </div>
       <div class="time">September 16, 2014 8:21 PM</div>
     </div>
-    <a-row :gutter="32">
-      <a-col :span="12">
-        <div class="small_content">
-          <img src="@image/layouts/project_02.svg" alt="" />
-          <div class="heading">
-            Business Travelers Actually Like Trips More Than 9to5 Office Life
+    <a-row :gutter="32" v-if="projects.length != 0">
+      <a-col :span="12" v-for="item in projects" :key="item.id">
+        <NuxtLink :to="`/blog/${item.id}-${item.slug}`">
+          <div class="small_content">
+            <img :src="item.image" alt="" />
+            <div class="heading">
+              {{ item.title }}
+            </div>
+            <div class="time">{{ item.created_at }}</div>
           </div>
-          <div class="time">September 16, 2014 8:21 PM</div>
-        </div>
-      </a-col>
-      <a-col :span="12">
-        <div class="small_content">
-          <img src="@image/layouts/project_03.svg" alt="" />
-          <div class="heading">
-            Disney Is Bringing Even More Magic to Its New Cruise Ship This Year
-          </div>
-          <div class="time">September 16, 2014 8:21 PM</div>
-        </div>
-      </a-col>
-      <a-col :span="12">
-        <div class="small_content">
-          <img src="@image/layouts/project_04.svg" alt="" />
-          <div class="heading">
-            How to Enjoy Eating by Yourself As a Solo Traveler On Your Holiday
-          </div>
-          <div class="time">September 16, 2014 8:21 PM</div>
-        </div>
-      </a-col>
-      <a-col :span="12">
-        <div class="small_content">
-          <img src="@image/layouts/project_05.svg" alt="" />
-          <div class="heading">
-            20 Green Destinations Where You Can Have an Eco-friendly Vacation
-          </div>
-          <div class="time">September 16, 2014 8:21 PM</div>
-        </div>
+        </NuxtLink>
       </a-col>
     </a-row>
     <vs-button class="btn_started" color="rgb(59,222,200)"> View All </vs-button>
@@ -51,7 +26,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["projects"],
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="scss" scoped>

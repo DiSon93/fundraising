@@ -28,7 +28,9 @@
       </a-form-item>
       <a-form-item>
         <div class="form_submit">
-          <vs-button shadow class="btn_back" @click="back = true"> Back </vs-button>
+          <vs-button shadow class="btn_back" @click="back = true" color="#BDBDBD">
+            Back
+          </vs-button>
           <vs-button class="btn_started" color="rgb(59,222,200)"> Continue </vs-button>
         </div>
       </a-form-item>
@@ -49,15 +51,16 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      //   this.form.validateFieldsAndScroll((err, values) => {
-      //     if (!err) {
-      //       console.log("Received values of form: ", values);
-      //     }
-      //   });
-      if (this.back) {
-        this.$emit("backToStep");
+      if (!this.back) {
+        this.form.validateFieldsAndScroll((err, values) => {
+          if (!err) {
+            this.$store.commit("projects/registerProject", values);
+            this.$emit("continue");
+          }
+        });
       } else {
-        this.$emit("continue");
+        this.back = false;
+        this.$emit("backToStep");
       }
     },
   },
@@ -119,7 +122,8 @@ export default {
     font-size: 18px;
     line-height: 24px;
     padding: 2px 12px;
-    color: $green-black-01;
+    color: $white-text-01;
+    background: $black-text-05;
   }
 }
 </style>

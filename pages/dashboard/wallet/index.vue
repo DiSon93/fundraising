@@ -93,7 +93,7 @@ export default {
     active: 1,
   }),
   mounted() {
-    // this.active = this.$route.params.route ? this.$route.params.route : 1;
+    // this.active = this.$route.params?.id ? this.$route.params.id : 1;
   },
 };
 </script>

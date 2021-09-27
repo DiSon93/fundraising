@@ -103,7 +103,7 @@
             placeholder="Description * "
             allow-clear
             v-decorator="[
-              'description',
+              'content',
               {
                 rules: [
                   {
@@ -154,6 +154,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   transition: {
     name: "home",
@@ -165,10 +166,22 @@ export default {
       authorization: "authorization-text",
     },
   }),
+  computed: {
+    ...mapState("help", ["newTicket"]),
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "submit-ticket" });
   },
+  mounted() {
+    // this.createSubmitTicket();
+  },
   methods: {
+    async createSubmitTicket(values) {
+      try {
+        await this.$store.dispatch("help/createTicket", values);
+        console.log("newTicket", this.newTicket);
+      } catch {}
+    },
     onSearch(value) {
       console.log(value);
     },
@@ -177,6 +190,7 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Received values of form: ", values);
+          this.createSubmitTicket(values);
         }
       });
     },

@@ -71,7 +71,7 @@
                 size="large"
                 placeholder="Authentication Code"
                 v-decorator="[
-                  'code',
+                  'twofa_code',
                   {
                     rules: [
                       {
@@ -85,11 +85,7 @@
               />
             </a-form-item>
             <a-form-item class="form_submit">
-              <vs-button
-                class="btn_started"
-                color="rgb(59,222,200)"
-                @click="continueFunc"
-              >
+              <vs-button class="btn_started" color="rgb(59,222,200)">
                 Continue
               </vs-button>
             </a-form-item>
@@ -102,7 +98,7 @@
 
 <script>
 import QrcodeVue from "qrcode.vue";
-
+import { mapState, mapActions } from "vuex";
 export default {
   transition: {
     name: "slide-fade",
@@ -119,14 +115,24 @@ export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "authetication" });
   },
+  computed: {
+    ...mapState("account", ["twoFA"]),
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Received values of form: ", values);
+          this.changeTwoFaSubmit(values);
         }
       });
+    },
+    async changeTwoFaSubmit(values) {
+      try {
+        await this.$store.dispatch("account/changeTwoFaSubmit", values);
+        this.continueFunc();
+      } catch {}
     },
     continueFunc() {
       this.$emit("continue");
