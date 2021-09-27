@@ -9,7 +9,7 @@
         <a-input
           placeholder="Your Name"
           v-decorator="[
-            'name',
+            'fullname',
             {
               rules: [
                 {
@@ -55,12 +55,13 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      // this.form.validateFieldsAndScroll((err, values) => {
-      //   if (!err) {
-      //     console.log("Received values of form: ", values);
-      //   }
-      // });
-      this.$emit("continue");
+      this.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          console.log("Received values of form: ", values);
+          this.$store.commit("projects/registerProject", values);
+          this.$emit("continue");
+        }
+      });
     },
   },
 };

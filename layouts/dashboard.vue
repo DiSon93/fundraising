@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="authenticate">
     <div class="dashboard_layout">
       <div class="side-bar">
         <div class="side_bar_position">
@@ -79,9 +79,22 @@
             >
               Blog
             </vs-button>
-            <a-button shape="circle">
-              <img src="@image/icons/users.svg" alt="" />
-            </a-button>
+            <a-dropdown>
+              <a-menu slot="overlay" @click="handleMenuClick" id="account_dashboard">
+                <a-menu-item key="1">
+                  <img src="@image/icons/account_dashboard.svg" alt="" /> Account
+                </a-menu-item>
+                <a-menu-item key="2">
+                  <img src="@image/icons/security_dashboard.svg" alt="" /> Security
+                </a-menu-item>
+                <a-menu-item key="3">
+                  <img src="@image/icons/signout.svg" alt="" /> Sign out
+                </a-menu-item>
+              </a-menu>
+              <a-button shape="circle">
+                <img src="@image/icons/users.svg" alt="" />
+              </a-button>
+            </a-dropdown>
           </div>
         </div>
         <div class="main_content">
@@ -103,12 +116,17 @@
       </div>
     </div>
   </div>
+  <div v-else class="loading-page">
+    <div class="loading"></div>
+  </div>
 </template>
 
 <script>
 import Service from "@component/Service.vue";
 import Privacy from "@component/Privacy.vue";
+import { mapState, mapActions } from "vuex";
 export default {
+  middleware: "authenticated",
   components: {
     Privacy,
     Service,
@@ -118,7 +136,9 @@ export default {
     fixed: false,
     side: "home",
     activeRoute: 1,
+    authenticate: false,
   }),
+  beforeCreate() {},
   created() {
     if (this.$route.path == "/dashboard") {
       this.activeRoute = 1;
@@ -134,7 +154,23 @@ export default {
       this.active = 0;
     }
   },
+  mounted() {
+    if (process.client && !localStorage.getItem("user")) {
+      this.$router.push("/login");
+    } else {
+      this.authenticate = true;
+    }
+  },
+  computed: {
+    ...mapState("auth", ["currentUser"]),
+  },
   methods: {
+    start() {
+      this.authenticate = true;
+    },
+    finish() {
+      this.authenticate = false;
+    },
     redirectHome() {
       this.$router.push("/");
       this.active = 1;
@@ -146,6 +182,32 @@ export default {
     getStart() {
       this.$router.push("/register");
       this.active = 3;
+    },
+    handleMenuClick(e) {
+      console.log("click", e);
+      if (e.key == 3) {
+        // this.isConfirm = true;
+        this.showConfirm();
+      }
+    },
+    showConfirm() {
+      this.$confirm({
+        title: "Confirm",
+        content: (h) => <div>Do you want to log out from fundraising?</div>,
+        onOk: () => {
+          this.handleLogout();
+        },
+        onCancel() {
+          console.log("Cancel");
+        },
+        class: "confirmPopup",
+      });
+    },
+
+    handleLogout() {
+      window.localStorage.clear();
+      window.location.reload(true);
+      window.location.replace("/");
     },
   },
 };
@@ -283,6 +345,35 @@ export default {
     line-height: 24px;
     color: $white-text-01;
     margin: auto 0;
+  }
+}
+.loading-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 1rem;
+  text-align: center;
+  font-size: 3rem;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.loading {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border: 10px solid rgba(9, 133, 81, 0.705);
+  border-radius: 50%;
+  border-top-color: #158876;
+  animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
   }
 }
 </style>

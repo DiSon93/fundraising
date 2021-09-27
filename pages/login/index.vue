@@ -53,14 +53,16 @@
         <div
           class="g-recaptcha"
           data-sitekey="6Ld9YF0cAAAAAHYqt51D4zOEOkDlgrPu5QV7Kce-"
+          data-callback="myRecaptchaMethod"
+          data-expired-callback="myRecaptchaExpiredMethod"
         ></div>
       </div>
       <a-form-item class="form_submit">
         <vs-button
           class="btn_started"
-          :active="active == 3"
-          @click="redirectLink"
           color="rgb(59,222,200)"
+          :disabled="disabled"
+          :loading="loading"
         >
           Log in
         </vs-button>
@@ -83,12 +85,15 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   data() {
     return {
-      active: 0,
       value: 0,
       hasOpenLoading: false,
+      disabled: true,
+      loading: false,
     };
   },
   beforeCreate() {
@@ -96,13 +101,29 @@ export default {
   },
   mounted() {
     this.handleClickLoading("points");
+    window.myRecaptchaMethod = this.myRecaptchaMethod;
+    window.myRecaptchaExpiredMethod = this.myRecaptchaExpiredMethod;
+  },
+  computed: {
+    ...mapState("auth", ["errorMessage"]),
   },
   methods: {
+    myRecaptchaMethod: function (response) {
+      console.log(response);
+      this.disabled = false;
+    },
+    myRecaptchaExpiredMethod: function () {
+      this.disabled = true;
+
+      // this is google's code verifying the user is human'
+      // that you check with google on the backend.
+    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Received values of form: ", values);
+          this.loginIntoServer(values);
         }
       });
     },
@@ -117,8 +138,34 @@ export default {
         this.hasOpenLoading = false;
       }, 1000);
     },
-    redirectLink() {
-      this.active = 3;
+    async loginIntoServer(user) {
+      this.loading = true;
+      try {
+        await this.$store.dispatch("auth/loginIntoServer", {
+          email: user.email,
+          password: user.password,
+        });
+        if (this.errorMessage) {
+          this.loading = false;
+          this.openNotification("top-right", "danger", "Error");
+        } else {
+          this.openNotification("top-right", "#0b9985", "Success");
+          this.loading = false;
+          this.$router.push("/dashboard");
+        }
+      } catch {
+        console.log("Error", this.errorMessage);
+      }
+    },
+    openNotification(position = null, color, title) {
+      const noti = this.$vs.notification({
+        flat: true,
+        progress: "auto",
+        color,
+        position,
+        title,
+        text: this.errorMessage ? this.errorMessage : `Login success`,
+      });
     },
   },
 };

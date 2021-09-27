@@ -7,7 +7,7 @@
         <vs-button
           class="btn_started"
           color="rgb(59,222,200)"
-          @click="$router.push('/register')"
+          @click="getStartToDashBoard"
         >
           Get Started
         </vs-button>
@@ -22,10 +22,23 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   data: () => ({
     active: 0,
   }),
+  computed: {
+    ...mapState("auth", ["currentUser"]),
+  },
+  methods: {
+    getStartToDashBoard() {
+      if (this.currentUser) {
+        this.$router.push("/dashboard");
+      } else {
+        this.$router.push("/register");
+      }
+    },
+  },
 };
 </script>
 

@@ -7,8 +7,10 @@
     <a-form :form="form" @submit="handleSubmit">
       <a-form-item label="When do you want to launch your token sale?">
         <a-date-picker
-          v-decorator="['date-picker', config]"
+          v-decorator="['date_start', config]"
           placeholder="06 - Nov - 2021"
+          format="YYYY-MM-DD"
+          @change="onChange"
         />
       </a-form-item>
       <a-form-item>
@@ -22,12 +24,14 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   data: () => ({
     config: {
       rules: [{ type: "object", required: true, message: "Please select time!" }],
     },
     back: false,
+    time: undefined,
   }),
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "Step9" });
@@ -35,16 +39,23 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      //   this.form.validateFieldsAndScroll((err, values) => {
-      //     if (!err) {
-      //       console.log("Received values of form: ", values);
-      //     }
-      //   });
-      if (this.back) {
-        this.$emit("backToStep");
+
+      if (!this.back) {
+        this.form.validateFieldsAndScroll((err, values) => {
+          console.log("time", this.time);
+          if (!err) {
+            this.$store.commit("projects/registerProject", { date_start: this.time });
+            this.$emit("continue");
+          }
+        });
       } else {
-        this.$emit("continue");
+        this.back = false;
+        this.$emit("backToStep");
       }
+    },
+    onChange(date, dateString) {
+      console.log(date, dateString);
+      this.time = moment(dateString).unix();
     },
   },
 };
@@ -91,7 +102,8 @@ export default {
     font-size: 18px;
     line-height: 24px;
     padding: 2px 12px;
-    color: $green-black-01;
+    color: $white-text-01;
+    background: $black-text-05;
   }
 }
 </style>

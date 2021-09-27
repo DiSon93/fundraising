@@ -10,7 +10,7 @@
           placeholder="Tell us about project (short description),the token,metrics , and its economic model?"
           allow-clear
           v-decorator="[
-            'description',
+            'description_project',
             {
               rules: [
                 {
@@ -45,15 +45,16 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      //   this.form.validateFieldsAndScroll((err, values) => {
-      //     if (!err) {
-      //       console.log("Received values of form: ", values);
-      //     }
-      //   });
-      if (this.back) {
-        this.$emit("backToStep");
+      if (!this.back) {
+        this.form.validateFieldsAndScroll((err, values) => {
+          if (!err) {
+            this.$store.commit("projects/registerProject", values);
+            this.$emit("continue");
+          }
+        });
       } else {
-        this.$emit("continue");
+        this.back = false;
+        this.$emit("backToStep");
       }
     },
   },
@@ -101,7 +102,8 @@ export default {
     font-size: 18px;
     line-height: 24px;
     padding: 2px 12px;
-    color: $green-black-01;
+    color: $white-text-01;
+    background: $black-text-05;
   }
 }
 </style>

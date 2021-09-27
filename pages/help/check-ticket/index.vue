@@ -27,8 +27,8 @@
         </a-col>
       </a-row>
     </div>
-    <div class="contents">
-      <a-badge :count="99" :number-style="{ backgroundColor: '#52c41a' }">
+    <div class="contents" v-if="ticketList.length != 0">
+      <!-- <a-badge :count="99" :number-style="{ backgroundColor: '#52c41a' }">
         <div class="message">
           <NuxtLink to="/help/check-ticket/1">
             <div class="name">
@@ -39,45 +39,18 @@
             <div class="info">Issue Type: <span class="detail">Account</span></div>
           </NuxtLink>
         </div>
-      </a-badge>
-      <div class="message_empty message">
+      </a-badge> -->
+      <div class="message_empty message" v-for="item in ticketList" :key="item.id">
         <NuxtLink to="/help/check-ticket/1">
           <div class="name">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit.
+            {{ item.content }}
           </div>
-          <div class="info">Create: <span class="detail">04/04/2021</span></div>
-          <div class="info">Issue Type: <span class="detail">Account</span></div>
-        </NuxtLink>
-      </div>
-      <div class="message_empty message">
-        <NuxtLink to="/help/check-ticket/1">
-          <div class="name">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit.
+          <div class="info">
+            Create: <span class="detail">{{ item.created_at }}</span>
           </div>
-          <div class="info">Create: <span class="detail">04/04/2021</span></div>
-          <div class="info">Issue Type: <span class="detail">Account</span></div>
-        </NuxtLink>
-      </div>
-      <div class="message_empty message">
-        <NuxtLink to="/help/check-ticket/1">
-          <div class="name">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit.
+          <div class="info">
+            Issue Type: <span class="detail">{{ item.subject }}</span>
           </div>
-          <div class="info">Create: <span class="detail">04/04/2021</span></div>
-          <div class="info">Issue Type: <span class="detail">Account</span></div>
-        </NuxtLink>
-      </div>
-      <div class="message_empty message">
-        <NuxtLink to="/help/check-ticket/1">
-          <div class="name">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit.
-          </div>
-          <div class="info">Create: <span class="detail">04/04/2021</span></div>
-          <div class="info">Issue Type: <span class="detail">Account</span></div>
         </NuxtLink>
       </div>
     </div>
@@ -85,6 +58,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   transition: {
     name: "home",
@@ -96,10 +71,22 @@ export default {
       authorization: "authorization-text",
     },
   }),
+  computed: {
+    ...mapState("help", ["ticketList"]),
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "submit-ticket" });
   },
+  mounted() {
+    this.getTicketList();
+  },
   methods: {
+    async getTicketList() {
+      try {
+        await this.$store.dispatch("help/checkTicketList");
+        console.log("checkTicketList", this.ticketList);
+      } catch {}
+    },
     onSearch(value) {
       console.log(value);
     },

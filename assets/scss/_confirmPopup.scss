@@ -1,0 +1,13 @@
+.ant-modal-confirm.confirmPopup{
+    .ant-btn.ant-btn-primary{
+        background-color: $green-black-02;
+        border: 1px solid $green-black-02;
+        &:hover{
+            color:  $white-text-01;
+        }
+    }
+    .ant-btn:hover{
+        color:  $green-black-02;
+        border: 1px solid $green-black-02;
+    }
+}

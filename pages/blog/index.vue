@@ -1,175 +1,127 @@
 <template>
-  <transition name="home" mode="out-in">
-    <div class="blog">
-      <a-row class="carousel">
-        <a-col :xs="24" :sm="16">
-          <NuxtLink to="/blog/1">
-            <div class="large_background">
+  <client-only>
+    <transition name="home" mode="out-in">
+      <div class="blog">
+        <a-row class="carousel">
+          <a-col :xs="24" :sm="16">
+            <NuxtLink to="/blog/1">
+              <div class="large_background">
+                <a-row>
+                  <a-col :xs="24" :sm="16" class="main_content">
+                    <div class="position">
+                      <div class="review">
+                        <vs-button class="btn_started" color="rgb(59,222,200)">
+                          Review
+                        </vs-button>
+                      </div>
+                      <div class="title">
+                        <div>2020 Lincoln Aviator: Luxury done right</div>
+                      </div>
+                      <div class="quote">
+                        <div class="name">By Mitchell Cooper / Annette Robertson</div>
+                        <div class="time">|</div>
+                        <div class="time">November 26, 2018 9:19 AM</div>
+                      </div>
+                      <div class="content">
+                        Smooth, quiet and unintimidating, the 2020 Lincoln Aviator is
+                        spearheading a renaissance at Lincoln, a comeback that's, oddly
+                        enough, rooted in the brand's past.
+                      </div>
+                    </div>
+                  </a-col>
+                  <a-col :xs="24" :sm="8" class="community">
+                    <div class="social">
+                      <div class="comment">
+                        <img src="@image/icons/comment.svg" alt="" />
+                        <span>248</span>
+                      </div>
+                      <div>
+                        <img src="@image/icons/eyes.svg" alt="" />
+                        <span>659</span>
+                      </div>
+                    </div>
+                  </a-col>
+                </a-row>
+              </div>
+            </NuxtLink>
+          </a-col>
+          <a-col :xs="24" :sm="8">
+            <div class="small_background_01">
               <a-row>
                 <a-col :xs="24" :sm="16" class="main_content">
                   <div class="position">
-                    <div class="review">
-                      <vs-button class="btn_started" color="rgb(59,222,200)">
-                        Review
-                      </vs-button>
-                    </div>
                     <div class="title">
-                      <div>2020 Lincoln Aviator: Luxury done right</div>
+                      <div class="small">First Drive: 2020 Jeep Wrangler EcoDiesel</div>
                     </div>
                     <div class="quote">
-                      <div class="name">By Mitchell Cooper / Annette Robertson</div>
-                      <div class="time">|</div>
+                      <div class="name">By Jennie Black |</div>
                       <div class="time">November 26, 2018 9:19 AM</div>
                     </div>
-                    <div class="content">
-                      Smooth, quiet and unintimidating, the 2020 Lincoln Aviator is
-                      spearheading a renaissance at Lincoln, a comeback that's, oddly
-                      enough, rooted in the brand's past.
-                    </div>
                   </div>
                 </a-col>
-                <a-col :xs="24" :sm="8" class="community">
-                  <div class="social">
-                    <div class="comment">
-                      <img src="@image/icons/comment.svg" alt="" />
-                      <span>248</span>
-                    </div>
-                    <div>
-                      <img src="@image/icons/eyes.svg" alt="" />
-                      <span>659</span>
-                    </div>
-                  </div>
-                </a-col>
+                <a-col :xs="24" :sm="8" class="community"> </a-col>
               </a-row>
             </div>
-          </NuxtLink>
-        </a-col>
-        <a-col :xs="24" :sm="8">
-          <div class="small_background_01">
-            <a-row>
-              <a-col :xs="24" :sm="16" class="main_content">
-                <div class="position">
-                  <div class="title">
-                    <div class="small">First Drive: 2020 Jeep Wrangler EcoDiesel</div>
+            <div class="small_background_02">
+              <a-row>
+                <a-col :xs="24" :sm="16" class="main_content">
+                  <div class="position">
+                    <div class="title">
+                      <div class="small">First Drive: 2020 Jeep Wrangler EcoDiesel</div>
+                    </div>
+                    <div class="quote">
+                      <div class="name">By Jennie Black |</div>
+                      <div class="time">November 26, 2018 9:19 AM</div>
+                    </div>
                   </div>
-                  <div class="quote">
-                    <div class="name">By Jennie Black |</div>
-                    <div class="time">November 26, 2018 9:19 AM</div>
-                  </div>
+                </a-col>
+                <a-col :xs="24" :sm="8" class="community"> </a-col>
+              </a-row>
+            </div>
+          </a-col>
+        </a-row>
+        <a-row class="news" :gutter="32" v-if="blogListRender.length != 0">
+          <div class="news_title">Latest News</div>
+          <a-col :xs="24" :sm="15">
+            <div class="news_item" v-for="item in blogListRender" :key="item.id">
+              <!-- <a href="javascript:;"> -->
+              <img :src="item.image" alt="" />
+              <!-- </a> -->
+              <div class="item">
+                <NuxtLink :to="`/blog/${item.id}-${item.slug}`" class="title">
+                  {{ item.title }}
+                </NuxtLink>
+                <div class="quote">
+                  <div>{{ item.user ? item.user.username : null }}</div>
+                  <div class="time">|</div>
+                  <div class="time">{{ item.created_at }}</div>
                 </div>
-              </a-col>
-              <a-col :xs="24" :sm="8" class="community"> </a-col>
-            </a-row>
-          </div>
-          <div class="small_background_02">
-            <a-row>
-              <a-col :xs="24" :sm="16" class="main_content">
-                <div class="position">
-                  <div class="title">
-                    <div class="small">First Drive: 2020 Jeep Wrangler EcoDiesel</div>
-                  </div>
-                  <div class="quote">
-                    <div class="name">By Jennie Black |</div>
-                    <div class="time">November 26, 2018 9:19 AM</div>
-                  </div>
+                <div class="content">
+                  {{ item.description }}
                 </div>
-              </a-col>
-              <a-col :xs="24" :sm="8" class="community"> </a-col>
-            </a-row>
-          </div>
-        </a-col>
-      </a-row>
-      <a-row class="news" :gutter="32">
-        <div class="news_title">Latest News</div>
-        <a-col :xs="24" :sm="15">
-          <div class="news_item">
-            <!-- <a href="javascript:;"> -->
-            <img src="@image/layouts/news_01.svg" alt="" />
-            <!-- </a> -->
-            <div class="item">
-              <NuxtLink to="/blog/1" class="title">
-                Et non incididunt ex sit pariatur labore do culpa excepteur.
-              </NuxtLink>
-              <div class="quote">
-                <div>By Jennie Black</div>
-                <div class="time">|</div>
-                <div class="time">November 26, 2018 9:19 AM</div>
+                <a
+                  href="javascript:;"
+                  @click="$router.push(`/blog/${item.id}-${item.slug}`)"
+                  >Continue Reading</a
+                >
               </div>
-              <div class="content">
-                The software giant says it built the new technology for its corporate
-                customers, but it could also someday end.
-              </div>
-              <a href="javascript:;" @click="$router.push('/blog/1')">Continue Reading</a>
             </div>
-          </div>
-          <div class="news_item">
-            <img src="@image/layouts/news_02.svg" alt="" />
-            <div class="item">
-              <NuxtLink to="/blog/1" class="title">
-                Deserunt ad fugiat irure excepteur consequat est officia sint.
-              </NuxtLink>
-              <div class="quote">
-                <div>By Jennie Black</div>
-                <div class="time">|</div>
-                <div class="time">November 26, 2018 9:19 AM</div>
-              </div>
-              <div class="content">
-                The software giant says it built the new technology for its corporate
-                customers, but it could also someday end.
-              </div>
-              <a href="javascript:;" @click="$router.push('/blog/1')">Continue Reading</a>
-            </div>
-          </div>
-          <div class="news_item">
-            <img src="@image/layouts/news_03.svg" alt="" />
-            <NuxtLink to="/blog/1" class="item">
-              <NuxtLink to="/blog/1" class="title"
-                >Occaecat tempor incididunt exercitation tempor.</NuxtLink
-              >
-              <div class="quote">
-                <div>By Jennie Black</div>
-                <div class="time">|</div>
-                <div class="time">November 26, 2018 9:19 AM</div>
-              </div>
-              <div class="content">
-                The software giant says it built the new technology for its corporate
-                customers, but it could also someday end.
-              </div>
-              <a href="javascript:;" @click="$router.push('/blog/1')">Continue Reading</a>
-            </NuxtLink>
-          </div>
-          <div class="news_item">
-            <img src="@image/layouts/news_01.svg" alt="" />
-            <div class="item">
-              <NuxtLink to="/blog/1" class="title">
-                Et non incididunt ex sit pariatur labore do culpa excepteur.
-              </NuxtLink>
-              <div class="quote">
-                <div>By Jennie Black</div>
-                <div class="time">|</div>
-                <div class="time">November 26, 2018 9:19 AM</div>
-              </div>
-              <div class="content">
-                The software giant says it built the new technology for its corporate
-                customers, but it could also someday end.
-              </div>
-              <a href="javascript:;" @click="$router.push('/blog/1')">Continue Reading</a>
-            </div>
-          </div>
-        </a-col>
-        <a-col :xs="24" :sm="9">
-          <NewsCategories />
-          <NewsProject />
-        </a-col>
-      </a-row>
-    </div>
-  </transition>
+          </a-col>
+          <a-col :xs="24" :sm="9">
+            <NewsCategories />
+            <NewsProject :projects="projectBlog" :key="keyChild" />
+          </a-col>
+        </a-row>
+      </div>
+    </transition>
+  </client-only>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import NewsCategories from "@component/Blog/NewsCategories.vue";
 import NewsProject from "@component/Blog/NewsProject.vue";
-
+import moment from "moment";
 export default {
   components: {
     NewsCategories,
@@ -178,6 +130,35 @@ export default {
   transition: {
     name: "home",
     mode: "out-in",
+  },
+  computed: {
+    ...mapState("blogs", ["blogList"]),
+  },
+  data() {
+    return {
+      blogListRender: [],
+      projectBlog: [],
+      keyChild: 0,
+    };
+  },
+  mounted() {
+    this.getBlogList();
+  },
+  methods: {
+    // ...mapActions("blogs", ["getBlogList"]),
+    async getBlogList() {
+      try {
+        await this.$store.dispatch("blogs/getBlogList");
+        console.log("blogList", this.blogList);
+        this.blogListRender = this.blogList.map((item) => {
+          return { ...item, created_at: moment(item.created_at).format("LLL") };
+        });
+        this.projectBlog = this.blogListRender.filter((u) => {
+          return u.category_id == 14;
+        });
+        console.log("projectBlog", this.projectBlog);
+      } catch {}
+    },
   },
 };
 </script>

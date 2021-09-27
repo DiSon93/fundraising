@@ -141,6 +141,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   transition: {
     name: "slide-fade",
@@ -269,7 +270,32 @@ export default {
       },
     ],
   }),
+  computed: {
+    ...mapState("packages", ["packageList"]),
+  },
+  mounted() {
+    this.getPackageList();
+  },
   methods: {
+    async getPackageList() {
+      try {
+        await this.$store.dispatch("packages/getPackageList");
+        console.log("packageList", this.packageList);
+        this.tokens = this.packageList.map((u) => {
+          return {
+            id: u.id,
+            project: u.project?.title,
+            status: u.status,
+            start: u.start_at,
+            end: u.end_at,
+            accept: u.platform?.title,
+            distribution: u.min_distribution,
+            image: require(u.project?.logo),
+            open: false,
+          };
+        });
+      } catch {}
+    },
     handleChange(value) {
       console.log(`selected ${value}`);
     },

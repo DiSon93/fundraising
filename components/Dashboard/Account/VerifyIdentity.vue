@@ -62,7 +62,7 @@
               size="large"
               placeholder="Full Addres"
               v-decorator="[
-                'address',
+                'full_adress',
                 {
                   rules: [{ required: true, message: 'Please input your full addres!' }],
                 },
@@ -180,7 +180,7 @@
                   size="large"
                   placeholder="Your Phone"
                   v-decorator="[
-                    'phone',
+                    'phone_number',
                     {
                       rules: [
                         {
@@ -213,12 +213,16 @@
                   size="large"
                   placeholder="Your Passport Number"
                   v-decorator="[
-                    'password',
+                    'passport_number',
                     {
                       rules: [
                         {
                           required: true,
                           message: 'Please input your password!',
+                        },
+                        {
+                          pattern: '^[0-9]+$',
+                          message: 'Please input your correct phone number!',
                         },
                       ],
                     },
@@ -230,15 +234,13 @@
           </a-row>
 
           <div class="checkbox">
-            <a-radio-group name="radioGroup" :default-value="1">
-              <a-radio :value="1"> Male </a-radio>
-              <a-radio :value="2"> Female </a-radio>
+            <a-radio-group name="radioGroup" v-model="gender">
+              <a-radio :value="0"> Male </a-radio>
+              <a-radio :value="1"> Female </a-radio>
             </a-radio-group>
           </div>
           <a-form-item class="form_submit">
-            <vs-button class="btn_started" color="rgb(59,222,200)" @click="continueFunc">
-              Continue
-            </vs-button>
+            <vs-button class="btn_started" color="rgb(59,222,200)"> Continue </vs-button>
           </a-form-item>
         </a-form>
       </div>
@@ -247,9 +249,18 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      gender: 0,
+    };
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "verifyIdentity" });
+  },
+  computed: {
+    ...mapState("account", ["identity"]),
   },
   methods: {
     handleSubmit(e) {
@@ -257,8 +268,21 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Received values of form: ", values);
+          this.changeIdentity(values);
         }
       });
+    },
+    async changeIdentity(values) {
+      console.log("gender", this.gender);
+      try {
+        await this.$store.dispatch("account/changeIdentity", {
+          ...values,
+          birthday: `${values.year}-${values.month}-${values.date}`,
+          gender: this.gender,
+        });
+        console.log("identity", this.identity);
+        this.continueFunc();
+      } catch {}
     },
     onChange(e) {
       console.log(`checked = ${e.target.checked}`);

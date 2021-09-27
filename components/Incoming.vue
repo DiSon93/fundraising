@@ -374,6 +374,7 @@ export default {
     .card {
       width: 340px;
       height: 495px;
+      margin: 0 auto;
       margin-bottom: 30px;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 20px;

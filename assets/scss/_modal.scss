@@ -1,0 +1,14 @@
+#register_modal.vs-dialog-content {
+  .con-footer {
+    display: flex;
+    justify-content: right;
+    .vs-button {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+  .vs-dialog__header h4 {
+    font-weight: 700;
+    font-size: 18px;
+  }
+}

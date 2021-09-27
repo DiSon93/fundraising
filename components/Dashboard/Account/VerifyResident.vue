@@ -77,9 +77,7 @@
             </a-checkbox>
           </div>
           <a-form-item class="form_submit">
-            <vs-button class="btn_started" color="rgb(59,222,200)" @click="continueFunc">
-              Continue
-            </vs-button>
+            <vs-button class="btn_started" color="rgb(59,222,200)"> Continue </vs-button>
           </a-form-item>
         </a-form>
       </div>
@@ -98,11 +96,19 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log("Received values of form: ", values);
+          this.setCountry(values);
         }
       });
     },
     onChange(e) {
       console.log(`checked = ${e.target.checked}`);
+    },
+    async setCountry(values) {
+      try {
+        await this.$store.dispatch("account/changeResident", values);
+        // await this.$store.dispatch("packages/getPackageList");
+        this.continueFunc();
+      } catch {}
     },
     continueFunc() {
       this.$emit("continue");

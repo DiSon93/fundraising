@@ -10,7 +10,7 @@
           placeholder="How did you hear about Coinpad?"
           allow-clear
           v-decorator="[
-            'description',
+            'feedback_coinpad',
             {
               rules: [
                 {
@@ -23,12 +23,20 @@
         />
       </a-form-item>
       <div class="confirm">
-        <a-radio :value="1"> I'm sure what I'm saying is true </a-radio>
+        <a-radio val="1" v-model="picked"> I'm sure what I'm saying is true </a-radio>
       </div>
       <a-form-item>
         <div class="form_submit">
-          <vs-button shadow class="btn_back" @click="back = true"> Back </vs-button>
-          <vs-button class="btn_started" color="rgb(59,222,200)"> Continue </vs-button>
+          <vs-button shadow class="btn_back" @click="back = true" :disabled="isSubmit">
+            Back
+          </vs-button>
+          <vs-button
+            class="btn_started"
+            color="rgb(59,222,200)"
+            :disabled="!picked || isSubmit"
+          >
+            Continue
+          </vs-button>
         </div>
       </a-form-item>
     </a-form>
@@ -37,10 +45,11 @@
 
 <script>
 export default {
+  props: ["isSubmit"],
   data() {
     return {
       back: false,
-      value: 0,
+      picked: false,
     };
   },
   beforeCreate() {
@@ -49,15 +58,16 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      //   this.form.validateFieldsAndScroll((err, values) => {
-      //     if (!err) {
-      //       console.log("Received values of form: ", values);
-      //     }
-      //   });
-      if (this.back) {
-        this.$emit("backToStep");
+      if (!this.back) {
+        this.form.validateFieldsAndScroll((err, values) => {
+          if (!err) {
+            this.$store.commit("projects/registerProject", values);
+            this.$emit("continue");
+          }
+        });
       } else {
-        this.$emit("continue");
+        this.back = false;
+        this.$emit("backToStep");
       }
     },
   },
@@ -105,7 +115,8 @@ export default {
     font-size: 18px;
     line-height: 24px;
     padding: 2px 12px;
-    color: $green-black-01;
+    color: $white-text-01;
+    background: $black-text-05;
   }
   .confirm {
     margin-top: -20px;

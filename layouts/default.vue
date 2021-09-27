@@ -25,11 +25,28 @@
             >
               Blog
             </vs-button>
+            <a-dropdown v-if="currentUser">
+              <a-menu slot="overlay" @click="handleMenuClick" id="account_dashboard">
+                <a-menu-item key="1">
+                  <img src="@image/icons/account_dashboard.svg" alt="" /> Account
+                </a-menu-item>
+                <a-menu-item key="2">
+                  <img src="@image/icons/security_dashboard.svg" alt="" /> Security
+                </a-menu-item>
+                <a-menu-item key="3">
+                  <img src="@image/icons/signout.svg" alt="" /> Sign out
+                </a-menu-item>
+              </a-menu>
+              <a-button shape="circle">
+                <img src="@image/icons/users.svg" alt="" />
+              </a-button>
+            </a-dropdown>
             <vs-button
               class="btn_started"
               :active="active == 3"
               @click="getStart"
               color="rgb(59,222,200)"
+              v-else
             >
               Get Started
             </vs-button>
@@ -56,6 +73,7 @@
 <script>
 import Service from "@component/Service.vue";
 import Privacy from "@component/Privacy.vue";
+import { mapState, mapActions } from "vuex";
 export default {
   components: {
     Privacy,
@@ -64,6 +82,7 @@ export default {
   data: () => ({
     active: 1,
     fixed: false,
+    isLogin: false,
   }),
   created() {
     if (this.$route.path == "/") {
@@ -88,6 +107,19 @@ export default {
         this.active = 0;
       }
     },
+    currentUser: function () {
+      if (this.currentUser) {
+        this.isLogin = true;
+      } else {
+        this.isLogin = false;
+      }
+    },
+  },
+  mounted() {
+    this.$store.commit("auth/commitUser", window.localStorage.getItem("user"));
+  },
+  computed: {
+    ...mapState("auth", ["currentUser"]),
   },
   methods: {
     redirectHome() {
@@ -101,6 +133,32 @@ export default {
     getStart() {
       this.$router.push("/register");
       this.active = 3;
+    },
+    handleMenuClick(e) {
+      console.log("click", e);
+      if (e.key == 3) {
+        // this.isConfirm = true;
+        this.showConfirm();
+      }
+    },
+    showConfirm() {
+      this.$confirm({
+        title: "Confirm",
+        content: (h) => <div>Do you want to log out from fundraising?</div>,
+        onOk: () => {
+          this.handleLogout();
+        },
+        onCancel() {
+          console.log("Cancel");
+        },
+        class: "confirmPopup",
+      });
+    },
+
+    handleLogout() {
+      window.localStorage.clear();
+      window.location.reload(true);
+      window.location.replace("/");
     },
   },
 };
@@ -133,6 +191,14 @@ export default {
   }
   .options {
     display: flex;
+    .ant-btn {
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-left: 50px;
+      margin-top: 5px;
+    }
   }
   .btn_home,
   .btn_blog {
