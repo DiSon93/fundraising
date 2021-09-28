@@ -44,23 +44,14 @@
             {{ tr.project }}
           </vs-td>
           <vs-td>
-            <div
-              v-bind:class="{ icoming: tr.status == 'Incoming' }"
-              v-if="tr.status == 'Incoming'"
-            >
-              {{ tr.status }}
+            <div v-bind:class="{ icoming: tr.status == 1 }" v-if="tr.status == 1">
+              Incoming
             </div>
-            <div
-              v-bind:class="{ tokensale: tr.status == 'Token Sale' }"
-              v-if="tr.status == 'Token Sale'"
-            >
-              {{ tr.status }}
+            <div v-bind:class="{ tokensale: tr.status == 2 }" v-if="tr.status == 2">
+              Token Sale
             </div>
-            <div
-              v-bind:class="{ finish: tr.status == 'Finish' }"
-              v-if="tr.status == 'Finish'"
-            >
-              {{ tr.status }}
+            <div v-bind:class="{ finish: tr.status == 3 }" v-if="tr.status == 3">
+              Finish
             </div>
           </vs-td>
           <vs-td>
@@ -98,10 +89,7 @@
                   <i class="bx bxs-file bx-sm"></i>
                 </div>
                 <div class="quote">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit.
+                  {{ tr.content }}
                 </div>
               </div>
               <div class="btn_accept">
@@ -112,6 +100,7 @@
                 >
                   Approve
                 </vs-button>
+                {không biết chức năng này là gì?}
               </div>
             </div>
           </template>
@@ -288,12 +277,16 @@ export default {
             status: u.status,
             start: u.start_at,
             end: u.end_at,
-            accept: u.platform?.title,
-            distribution: u.min_distribution,
-            image: require(u.project?.logo),
+            accept: u.token?.title,
+            distribution: u.distribution,
+            image: u.project?.logo,
+            content: u.platform?.content
+              ? u.platform?.content
+              : "Vui lòng cho nội dung giúp! Thanks",
             open: false,
           };
         });
+        console.log("tokens", this.tokens);
       } catch {}
     },
     handleChange(value) {

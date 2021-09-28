@@ -19,19 +19,33 @@ export default {
         },
 
         changeResident(state, data){
-          state.resident = data;
+          if(data.status == 200){
+            state.resident = data.results;
+            state.errorMessage = null;
+            }else{
+             state.errorMessage = data.message
+            }
           state.error = null;
-          state.errorMessage = null;
+   
         },
         changeIdentity(state, data){
-            state.identity = data;
+            if(data.status == 200){
+                state.identity = data.results;
+                state.errorMessage = null;
+                }else{
+                 state.errorMessage = data.message
+                };
             state.error = null;
-            state.errorMessage = null;
         },
         changeTwoFaSubmit(state, data){
-            state.twoFA = data;
+            if(data.status == 200){
+                state.twoFA = data.results;
+                state.errorMessage = null;
+                }else{
+                 state.errorMessage = data.message
+                 console.log("message",  data.message);
+                };
             state.error = null;
-            state.errorMessage = null;
         },
         setError(state, data) {
             state.error = data;
@@ -46,7 +60,7 @@ export default {
                     commit('changeResident', response.data);
                     resolve(response.data);
                 }).catch(e => {
-                    commit('setError', e.response);
+                    commit('setError', e.response.data.message);
                     reject(e);
                 })
             })
@@ -54,10 +68,10 @@ export default {
         changeIdentity:  ({ commit }, data) => {
             return new Promise((resolve, reject) => {
                 axiosClient({ url: '/api/profile/identity', method: 'POST', data: data }).then(response => {
-                    commit('changeIdentity', response.data.results);
+                    commit('changeIdentity', response.data);
                     resolve(response.data);
                 }).catch(e => {
-                    commit('setError', e.response);
+                    commit('setError',  e.response.data.message);
                     reject(e);
                 })
             })
@@ -68,7 +82,7 @@ export default {
                     commit('changeTwoFaSubmit', response.data);
                     resolve(response.data);
                 }).catch(e => {
-                    commit('setError', e.response);
+                    commit('setError', e.response.data.message);
                     reject(e);
                 })
             })

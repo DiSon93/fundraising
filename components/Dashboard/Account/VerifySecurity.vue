@@ -85,7 +85,7 @@
               />
             </a-form-item>
             <a-form-item class="form_submit">
-              <vs-button class="btn_started" color="rgb(59,222,200)">
+              <vs-button class="btn_started" color="rgb(59,222,200)" :loading="loading">
                 Continue
               </vs-button>
             </a-form-item>
@@ -111,12 +111,13 @@ export default {
   data: () => ({
     value: "https://example.com",
     size: 150,
+    loading: false,
   }),
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "authetication" });
   },
   computed: {
-    ...mapState("account", ["twoFA"]),
+    ...mapState("account", ["twoFA", "error", "errorMessage"]),
   },
   methods: {
     handleSubmit(e) {
@@ -129,13 +130,29 @@ export default {
       });
     },
     async changeTwoFaSubmit(values) {
+      this.loading = true;
       try {
         await this.$store.dispatch("account/changeTwoFaSubmit", values);
         this.continueFunc();
-      } catch {}
+        this.loading = false;
+      } catch {
+        this.openNotification("top-right", "danger", "Error");
+        this.loading = false;
+        setTimeout(this.continueFunc(), 2000);
+      }
     },
     continueFunc() {
       this.$emit("continue");
+    },
+    openNotification(position = null, color, title) {
+      const noti = this.$vs.notification({
+        flat: true,
+        progress: "auto",
+        color,
+        position,
+        title,
+        text: this.error ? this.error : `Login success`,
+      });
     },
   },
 };

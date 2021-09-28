@@ -5,9 +5,9 @@
     <div class="token">
       $2M+ invested by 10,000+ investors in over 250 completed transactions.
     </div>
-    <div class="incoming_info">
+    <div class="incoming_info" v-if="incomingList.length != 0">
       <a-row>
-        <a-col :xs="24" :sm="8">
+        <a-col :xs="24" :sm="8" v-for="item in incomingList" :key="item.id">
           <div class="card">
             <div class="card_img">
               <img src="@image/layouts/incoming_01.svg" alt="" />
@@ -16,13 +16,16 @@
               <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
               <div class="logo">
                 <img src="@image/layouts/incoming_logo.png" alt="" />
-                <img src="@image/icons/bitcoin.png" alt="" id="coin" />
+                <img :src="item.project ? item.project.logo : ''" alt="" id="coin" />
               </div>
-              <div class="card_title">CloudZ</div>
+              <div class="card_title">{{ item.project ? item.project.title : null }}</div>
               <div class="content">
                 <div class="quote">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit.
+                  {{
+                    item.platform
+                      ? item.platform.content
+                      : "Vui lòng cho nội dung giúp! Thanks"
+                  }}
                 </div>
                 <div class="social_netwwork">
                   <i class="bx bxl-facebook bx-sm"></i>
@@ -34,301 +37,30 @@
                 </div>
                 <div class="detail">
                   <div class="field">Start</div>
-                  <div class="time">9 Aug, 12:00</div>
+                  <div class="time">{{ item.start_at }}</div>
                 </div>
                 <a-divider />
                 <div class="detail">
                   <div class="field">End</div>
-                  <div class="time">29 Aug, 12:00</div>
+                  <div class="time">{{ item.end_at }}</div>
                 </div>
                 <a-divider />
                 <div class="detail">
                   <div class="field">Token Accept</div>
-                  <div class="coin">USDT</div>
+                  <div class="coin">{{ item.token ? item.token.title : null }}</div>
                 </div>
                 <a-divider />
                 <div class="detail">
                   <div class="field">Distribution</div>
-                  <div class="coin">10.000</div>
+                  <div class="coin">{{ item.distribution }}</div>
                 </div>
                 <vs-button
                   class="btn_join"
-                  @click="$router.push('/landingpage/incoming')"
-                  color="rgb(59,222,200)"
-                >
-                  Join Now
-                </vs-button>
-              </div>
-            </div>
-          </div>
-        </a-col>
-        <a-col :xs="24" :sm="8">
-          <div class="card">
-            <div class="card_img">
-              <img src="@image/layouts/incoming_01.svg" alt="" />
-            </div>
-            <div class="card_content">
-              <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
-              <div class="logo">
-                <img src="@image/layouts/incoming_logo.png" alt="" />
-                <img src="@image/icons/bitcoin.png" alt="" id="coin" />
-              </div>
-              <div class="card_title">CloudZ</div>
-              <div class="content">
-                <div class="quote">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit.
-                </div>
-                <div class="social_netwwork">
-                  <i class="bx bxl-facebook bx-sm"></i>
-                  <i class="bx bxl-twitter bx-sm"></i>
-                  <i class="bx bxl-telegram bx-sm"></i>
-                  <i class="bx bxl-medium bx-sm"></i>
-                  <i class="bx bxl-instagram-alt bx-sm"></i>
-                  <i class="bx bxs-file bx-sm"></i>
-                </div>
-                <div class="detail">
-                  <div class="field">Start</div>
-                  <div class="time">9 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">End</div>
-                  <div class="time">29 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Token Accept</div>
-                  <div class="coin">USDT</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Distribution</div>
-                  <div class="coin">10.000</div>
-                </div>
-                <vs-button
-                  class="btn_join"
-                  @click="$router.push('/landingpage/incoming')"
-                  color="rgb(59,222,200)"
-                >
-                  Join Now
-                </vs-button>
-              </div>
-            </div>
-          </div>
-        </a-col>
-        <a-col :xs="24" :sm="8">
-          <div class="card">
-            <div class="card_img">
-              <img src="@image/layouts/incoming_01.svg" alt="" />
-            </div>
-            <div class="card_content">
-              <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
-              <div class="logo">
-                <img src="@image/layouts/incoming_logo.png" alt="" />
-                <img src="@image/icons/bitcoin.png" alt="" id="coin" />
-              </div>
-              <div class="card_title">CloudZ</div>
-              <div class="content">
-                <div class="quote">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit.
-                </div>
-                <div class="social_netwwork">
-                  <i class="bx bxl-facebook bx-sm"></i>
-                  <i class="bx bxl-twitter bx-sm"></i>
-                  <i class="bx bxl-telegram bx-sm"></i>
-                  <i class="bx bxl-medium bx-sm"></i>
-                  <i class="bx bxl-instagram-alt bx-sm"></i>
-                  <i class="bx bxs-file bx-sm"></i>
-                </div>
-                <div class="detail">
-                  <div class="field">Start</div>
-                  <div class="time">9 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">End</div>
-                  <div class="time">29 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Token Accept</div>
-                  <div class="coin">USDT</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Distribution</div>
-                  <div class="coin">10.000</div>
-                </div>
-                <vs-button
-                  class="btn_join"
-                  @click="$router.push('/landingpage/incoming')"
-                  color="rgb(59,222,200)"
-                >
-                  Join Now
-                </vs-button>
-              </div>
-            </div>
-          </div>
-        </a-col>
-        <a-col :xs="24" :sm="8">
-          <div class="card">
-            <div class="card_img">
-              <img src="@image/layouts/incoming_01.svg" alt="" />
-            </div>
-            <div class="card_content">
-              <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
-              <div class="logo">
-                <img src="@image/layouts/incoming_logo.png" alt="" />
-                <img src="@image/icons/bitcoin.png" alt="" id="coin" />
-              </div>
-              <div class="card_title">CloudZ</div>
-              <div class="content">
-                <div class="quote">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit.
-                </div>
-                <div class="social_netwwork">
-                  <i class="bx bxl-facebook bx-sm"></i>
-                  <i class="bx bxl-twitter bx-sm"></i>
-                  <i class="bx bxl-telegram bx-sm"></i>
-                  <i class="bx bxl-medium bx-sm"></i>
-                  <i class="bx bxl-instagram-alt bx-sm"></i>
-                  <i class="bx bxs-file bx-sm"></i>
-                </div>
-                <div class="detail">
-                  <div class="field">Start</div>
-                  <div class="time">9 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">End</div>
-                  <div class="time">29 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Token Accept</div>
-                  <div class="coin">USDT</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Distribution</div>
-                  <div class="coin">10.000</div>
-                </div>
-                <vs-button
-                  class="btn_join"
-                  @click="$router.push('/landingpage/incoming')"
-                  color="rgb(59,222,200)"
-                >
-                  Join Now
-                </vs-button>
-              </div>
-            </div>
-          </div>
-        </a-col>
-        <a-col :xs="24" :sm="8">
-          <div class="card">
-            <div class="card_img">
-              <img src="@image/layouts/incoming_01.svg" alt="" />
-            </div>
-            <div class="card_content">
-              <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
-              <div class="logo">
-                <img src="@image/layouts/incoming_logo.png" alt="" />
-                <img src="@image/icons/bitcoin.png" alt="" id="coin" />
-              </div>
-              <div class="card_title">CloudZ</div>
-              <div class="content">
-                <div class="quote">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit.
-                </div>
-                <div class="social_netwwork">
-                  <i class="bx bxl-facebook bx-sm"></i>
-                  <i class="bx bxl-twitter bx-sm"></i>
-                  <i class="bx bxl-telegram bx-sm"></i>
-                  <i class="bx bxl-medium bx-sm"></i>
-                  <i class="bx bxl-instagram-alt bx-sm"></i>
-                  <i class="bx bxs-file bx-sm"></i>
-                </div>
-                <div class="detail">
-                  <div class="field">Start</div>
-                  <div class="time">9 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">End</div>
-                  <div class="time">29 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Token Accept</div>
-                  <div class="coin">USDT</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Distribution</div>
-                  <div class="coin">10.000</div>
-                </div>
-                <vs-button
-                  class="btn_join"
-                  @click="$router.push('/landingpage/incoming')"
-                  color="rgb(59,222,200)"
-                >
-                  Join Now
-                </vs-button>
-              </div>
-            </div>
-          </div>
-        </a-col>
-        <a-col :xs="24" :sm="8">
-          <div class="card">
-            <div class="card_img">
-              <img src="@image/layouts/incoming_01.svg" alt="" />
-            </div>
-            <div class="card_content">
-              <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
-              <div class="logo">
-                <img src="@image/layouts/incoming_logo.png" alt="" />
-                <img src="@image/icons/bitcoin.png" alt="" id="coin" />
-              </div>
-              <div class="card_title">CloudZ</div>
-              <div class="content">
-                <div class="quote">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit.
-                </div>
-                <div class="social_netwwork">
-                  <i class="bx bxl-facebook bx-sm"></i>
-                  <i class="bx bxl-twitter bx-sm"></i>
-                  <i class="bx bxl-telegram bx-sm"></i>
-                  <i class="bx bxl-medium bx-sm"></i>
-                  <i class="bx bxl-instagram-alt bx-sm"></i>
-                  <i class="bx bxs-file bx-sm"></i>
-                </div>
-                <div class="detail">
-                  <div class="field">Start</div>
-                  <div class="time">9 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">End</div>
-                  <div class="time">29 Aug, 12:00</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Token Accept</div>
-                  <div class="coin">USDT</div>
-                </div>
-                <a-divider />
-                <div class="detail">
-                  <div class="field">Distribution</div>
-                  <div class="coin">10.000</div>
-                </div>
-                <vs-button
-                  class="btn_join"
-                  @click="$router.push('/landingpage/incoming')"
+                  @click="
+                    $router.push(
+                      `/landingpage/${item.status}-${item.id}-${item.project.title}`
+                    )
+                  "
                   color="rgb(59,222,200)"
                 >
                   Join Now
@@ -344,10 +76,27 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import moment from "moment";
 export default {
   data: () => ({
     active: 0,
   }),
+  mounted() {
+    this.getIncomingProjectList();
+  },
+  computed: {
+    ...mapState("packages", ["incomingList"]),
+  },
+  methods: {
+    // ...mapActions("packages", ["getIncomingProjectList"]),
+    async getIncomingProjectList() {
+      try {
+        await this.$store.dispatch("packages/getIncomingProjectList");
+        console.log("packages", this.incomingList);
+      } catch {}
+    },
+  },
 };
 </script>
 
@@ -399,6 +148,7 @@ export default {
           left: 31%;
           overflow: hidden;
           border-radius: 50%;
+
           #coin {
             position: absolute;
             width: 100px;

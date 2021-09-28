@@ -1,11 +1,15 @@
 <template>
   <div class="landingpage">
     <a-row :gutter="32">
-      <a-col :sm="7">
+      <a-col :sm="7" v-if="renderPackage != {}">
         <div class="token_info">
           <img src="@image/layouts/incoming_logo.png" alt="" />
-          <div class="token_name">CloudZ</div>
-          <div class="quote">CloudZ/USDT</div>
+          <div class="token_name">
+            {{ renderPackage.project ? renderPackage.project.title : null }}
+          </div>
+          <div class="quote">
+            {{ renderPackage.token ? renderPackage.token.title : null }}/USDT
+          </div>
           <div class="social_netwwork">
             <i class="bx bxl-facebook bx-sm"></i>
             <i class="bx bxl-twitter bx-sm"></i>
@@ -18,6 +22,7 @@
             <div class="transfer">
               <div>1 BUSD = 25 ROY</div>
               <div>1 ROY= 0.04 BUSD</div>
+              <div>Không biết cái này</div>
             </div>
           </a>
           <div class="token_detail">
@@ -25,19 +30,19 @@
               <a-col :span="10">
                 <div class="label">Start:</div>
                 <div class="label">End:</div>
-                <div class="label">FCFS Opens:</div>
+                <div class="label">FCFS Opens: (What??)</div>
               </a-col>
               <a-col :span="14">
-                <div>16 Aug, 09:00 am UTC</div>
-                <div>16 Aug, 17:00 pm UTC</div>
+                <div>{{ renderPackage.start_at }}UTC</div>
+                <div>{{ renderPackage.end_at }} UTC</div>
                 <div>16 Aug, 16:30 pm UTC</div>
               </a-col>
             </a-row>
             <a-row class="detail">
               <a-col :span="16">
                 <div class="label">Access Type:</div>
-                <div class="label">Soft Cap:</div>
-                <div class="label">Hard Cap:</div>
+                <div class="label">Soft Cap: (What??)</div>
+                <div class="label">Hard Cap: (What??)</div>
                 <div class="label">Min - Max. Contribution:</div>
                 <div class="label">Address Contract:</div>
               </a-col>
@@ -45,14 +50,20 @@
                 <div>Level</div>
                 <div>$1000</div>
                 <div>$5000</div>
-                <div>$50-100</div>
-                <div>0xc25af3123d24 54c8fcd144c211 853f39</div>
+                <div>
+                  ${{ renderPackage.min_distribution }}-{{
+                    renderPackage.max_distribution
+                  }}
+                </div>
+                <div>
+                  {{ renderPackage.token ? renderPackage.token.address_contract : null }}
+                </div>
               </a-col>
             </a-row>
           </div>
         </div>
       </a-col>
-      <a-col :sm="17">
+      <a-col :sm="17" v-if="packageDetail != {}">
         <div
           class="infomation"
           v-bind:class="{ incoming: tag == 'incoming', finish: tag == 'finish' }"
@@ -60,7 +71,7 @@
           <div class="heading">
             <div class="coin">
               <img src="@image/layouts/incoming_logo.png" alt="" />
-              CloudZ
+              {{ packageDetail.project ? packageDetail.project.title : null }}
             </div>
             <div class="tag" v-if="tag == 'incoming'">
               <img src="@image/layouts/inccoming_tag.svg" alt="" id="tag_img" />
@@ -72,14 +83,7 @@
               <img src="@image/icons/incoming_tag_finish.svg" alt="" id="tag_img" />
             </div>
           </div>
-          <div class="content">
-            Babylons is a next generation NFT marketplace with low-cost minting, weekly
-            rewards, physical art gallery connections and and a DAO governance that puts
-            the power in the hands of the community. Babylons is a next generation NFT
-            marketplace with low-cost minting, weekly rewards, physical art gallery
-            connections and and a DAO governance that puts the power in the hands of the
-            community.
-          </div>
+          <div class="content">Vui lòng cho biết content ở đây là gì?</div>
           <div class="detail">
             <div class="token">
               <div class="title">Token</div>
@@ -94,11 +98,23 @@
                       <div class="label">Token Listing:</div>
                     </a-col>
                     <a-col :span="12">
-                      <div>CloudZ</div>
-                      <div>TRC20</div>
-                      <div>3,685,500 Cloudz</div>
-                      <div>4554.1545 Cloudz</div>
-                      <div>17 Aug</div>
+                      <div>
+                        {{ packageDetail.token ? packageDetail.token.title : null }}
+                      </div>
+                      <div>
+                        {{ packageDetail.platform ? packageDetail.platform.title : null }}
+                      </div>
+                      <div>
+                        {{
+                          packageDetail.token ? packageDetail.token.total_supply : null
+                        }}
+                        {{ packageDetail.token ? packageDetail.token.title : null }}
+                      </div>
+                      <div>
+                        {{ packageDetail.token ? packageDetail.token.init_supply : null }}
+                        {{ packageDetail.token ? packageDetail.token.title : null }}
+                      </div>
+                      <div>17 Aug {không biết}</div>
                     </a-col>
                   </a-row>
                 </div>
@@ -114,8 +130,8 @@
                       <div class="label">Vesting</div>
                     </a-col>
                     <a-col :span="16">
-                      <div>Claimed on Coinpad</div>
-                      <div>20% at TGE, and 20% each 2 weeks</div>
+                      <div>{{ packageDetail.distribution }}</div>
+                      <div>{{ packageDetail.vesting }}</div>
                     </a-col>
                   </a-row>
                 </div>
@@ -126,22 +142,22 @@
             <div class="title">Time Remaining</div>
             <div class="schedule">
               <div class="number">
-                10
+                {{ date }}
                 <div class="times">Day</div>
               </div>
               <div>:</div>
               <div class="number">
-                10
+                {{ hours }}
                 <div class="times">Hours</div>
               </div>
               <div>:</div>
               <div class="number">
-                10
+                {{ minutes }}
                 <div class="times">Minutes</div>
               </div>
               <div>:</div>
               <div class="number">
-                10
+                {{ seconds }}
                 <div class="times">Seconds</div>
               </div>
             </div>
@@ -174,6 +190,8 @@
 
 <script>
 import FeatureProject from "@component/FeatureProject.vue";
+import { mapState, mapActions } from "vuex";
+import moment from "moment";
 export default {
   components: {
     FeatureProject,
@@ -184,14 +202,50 @@ export default {
   },
   data: () => ({
     tag: "",
+    renderPackage: {},
+    showTime: null,
+    date: null,
+    hours: null,
+    minutes: null,
+    seconds: null,
   }),
+  computed: {
+    ...mapState("packages", ["packageDetail"]),
+  },
   mounted() {
     this.tag =
-      this.$route.params.id == "incoming"
+      this.$route.params.slug.split("-")[0] == "1"
         ? "incoming"
-        : this.$route.params.id == "sale"
+        : this.$route.params.slug.split("-")[0] == "2"
         ? "sale"
         : "finish";
+    this.getPackageDetail();
+  },
+  methods: {
+    async getPackageDetail() {
+      try {
+        await this.$store.dispatch(
+          "packages/getDetailPackage",
+          this.$route.params.slug.split("-")[1]
+        );
+        console.log("package", this.packageDetail);
+        this.renderPackage = {
+          ...this.packageDetail,
+          start_at: moment(this.packageDetail.start_at).format("DD MMM h:mm a"),
+          end_at: moment(this.packageDetail.end_at).format("DD MMM h:mm a"),
+        };
+        this.showTime = this.packageDetail.expired_time;
+        setInterval(() => this.countTime(), 1000);
+      } catch {}
+    },
+    countTime() {
+      this.showTime = this.showTime - 1;
+      this.date = Math.floor(this.showTime / 3600 / 24);
+      this.hours = Math.floor(this.showTime / 3600) % 24;
+      this.minutes = Math.floor(this.showTime / 60) % 60;
+      this.seconds = Math.floor(this.showTime % 60);
+      console.log(this.date, this.hours, this.minutes, this.seconds);
+    },
   },
 };
 </script>
@@ -264,9 +318,12 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      display: flex;
+      align-items: center;
       img {
         width: 56px;
         height: 56px;
+        margin-right: 5px;
       }
       .coin {
         font-weight: bold;

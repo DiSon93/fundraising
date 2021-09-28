@@ -77,7 +77,9 @@
             </a-checkbox>
           </div>
           <a-form-item class="form_submit">
-            <vs-button class="btn_started" color="rgb(59,222,200)"> Continue </vs-button>
+            <vs-button class="btn_started" color="rgb(59,222,200)" :loading="loading">
+              Continue
+            </vs-button>
           </a-form-item>
         </a-form>
       </div>
@@ -86,9 +88,18 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      loading: false,
+    };
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "VerifyResident" });
+  },
+  computed: {
+    ...mapState("account", ["errorMessage"]),
   },
   methods: {
     handleSubmit(e) {
@@ -104,14 +115,29 @@ export default {
       console.log(`checked = ${e.target.checked}`);
     },
     async setCountry(values) {
+      this.loading = true;
       try {
         await this.$store.dispatch("account/changeResident", values);
         // await this.$store.dispatch("packages/getPackageList");
         this.continueFunc();
-      } catch {}
+        this.loading = false;
+      } catch {
+        this.openNotification("top-right", "danger", "Error");
+        this.loading = false;
+      }
     },
     continueFunc() {
       this.$emit("continue");
+    },
+    openNotification(position = null, color, title) {
+      const noti = this.$vs.notification({
+        flat: true,
+        progress: "auto",
+        color,
+        position,
+        title,
+        text: this.errorMessage ? this.errorMessage : `Login success`,
+      });
     },
   },
 };
