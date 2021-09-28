@@ -191,6 +191,10 @@
                           pattern: '^[0-9]+$',
                           message: 'Please input your correct phone number!',
                         },
+                        {
+                          min: 7,
+                          message: 'The phone must be at least 7 characters!',
+                        },
                       ],
                     },
                   ]"
@@ -224,6 +228,10 @@
                           pattern: '^[0-9]+$',
                           message: 'Please input your correct phone number!',
                         },
+                        {
+                          max: 12,
+                          message: 'Indentity Card must be not longer than 12',
+                        },
                       ],
                     },
                   ]"
@@ -240,7 +248,9 @@
             </a-radio-group>
           </div>
           <a-form-item class="form_submit">
-            <vs-button class="btn_started" color="rgb(59,222,200)"> Continue </vs-button>
+            <vs-button class="btn_started" color="rgb(59,222,200)" :loading="loading">
+              Continue
+            </vs-button>
           </a-form-item>
         </a-form>
       </div>
@@ -254,13 +264,14 @@ export default {
   data() {
     return {
       gender: 0,
+      loading: false,
     };
   },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "verifyIdentity" });
   },
   computed: {
-    ...mapState("account", ["identity"]),
+    ...mapState("account", ["identity", "error"]),
   },
   methods: {
     handleSubmit(e) {
@@ -273,22 +284,36 @@ export default {
       });
     },
     async changeIdentity(values) {
-      console.log("gender", this.gender);
+      this.loading = true;
       try {
         await this.$store.dispatch("account/changeIdentity", {
           ...values,
           birthday: `${values.year}-${values.month}-${values.date}`,
           gender: this.gender,
+          // phone_number: `+${values.prefix} ${values.phone_number}`,
         });
-        console.log("identity", this.identity);
+        this.loading = false;
         this.continueFunc();
-      } catch {}
+      } catch {
+        this.openNotification("top-right", "danger", "Error");
+        this.loading = false;
+      }
     },
     onChange(e) {
       console.log(`checked = ${e.target.checked}`);
     },
     continueFunc() {
       this.$emit("continue");
+    },
+    openNotification(position = null, color, title) {
+      const noti = this.$vs.notification({
+        flat: true,
+        progress: "auto",
+        color,
+        position,
+        title,
+        text: this.error ? this.error : `Login success`,
+      });
     },
   },
 };
