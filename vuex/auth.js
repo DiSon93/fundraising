@@ -1,8 +1,9 @@
 import axiosClient from "~/utils/axiosClient";
 let currentUser = null;
-if (process.client) {
-    currentUser = window.localStorage.getItem("user") ? JSON.parse(window.localStorage.getItem("user")) : "";
-}
+// if (process.client) {
+//     currentUser = window.localStorage.getItem("user") ? JSON.parse(window.localStorage.getItem("user")) : "";
+// }
+
 export default {
     namespaced: true,
     state: {
@@ -25,15 +26,15 @@ export default {
         },
         setUser(state, data) {
             if(data.status == 200){
-            state.currentUser = data.results;
-            state.errorMessage = null;
+                state.currentUser = data.results;
+                state.errorMessage = null;
             }else{
-             state.errorMessage = data.message
+                state.errorMessage = data.message
             }
             state.error = null;
         },
         commitUser(state, data){
-             state.currentUser = data;
+            state.currentUser = data;
             state.errorMessage = null;
             state.error = null;
         },
@@ -66,9 +67,11 @@ export default {
             return new Promise((resolve, reject) => {
                 axiosClient({ url: '/api/auth/login', method: 'POST', data: data }).then(response => {
                     if (process.client && response.data.status == 200) {
-                        localStorage.setItem("user", JSON.stringify(response.data.results));
+                        localStorage.setItem("access_token", response.data.results.access_token);
+                        window.location = '/dashboard';
+                        // commit('setUser', response.data);
                     }
-                    commit('setUser', response.data);
+                    
                     resolve(response.data);
                 }).catch(e => {
                     commit('setError', e.response.data);
@@ -90,5 +93,30 @@ export default {
                 })
             })
         },
+        verifyUser: ({ commit }, data) => {
+            return new Promise((resolve, reject) => {
+                axiosClient({ url: '/api/auth/verify', method: 'POST', data: data }).then(response => {
+                    resolve(response.data);
+                }).catch(e => {
+                    commit('setError', e.response.data);
+                    reject(e);
+                })
+            })
+        },
+        fetchUser: ({ commit }) => {
+            return new Promise((resolve, reject) => {
+                axiosClient({ url: '/api/auth/user-profile', method: 'GET' }).then(response => {
+                    if (process.client && response.data.status == 200) {
+                        commit('setUser', response.data.results);
+                    }
+
+                    resolve(response.data);
+                }).catch(e => {
+                    commit('setError', e.response.data);
+                    reject(e);
+                    window.location = '/login';
+                })
+            })
+        }
     }
 }
