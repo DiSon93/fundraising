@@ -144,35 +144,24 @@
       async loginIntoServer(user) {
         this.loading = true;
         try {
-          await this.$store.dispatch("auth/loginIntoServer", {
+          let results = await this.$store.dispatch("auth/loginIntoServer", {
             email: user.email,
             password: user.password,
             recaptcha: this.recaptcha
           });
-          if (this.errorMessage) {
-            this.loading = false;
-            this.openNotification("top-right", "danger", "Error");
+
+          if (results.status == 200) {
+            this.$helper.notification('Success', results.message, results.status);
           } else {
-            this.openNotification("top-right", "#0b9985", "Success");
-            this.loading = false;
-            this.$router.push("/dashboard");
+            this.$helper.notification('Error', results.message, results.status);
           }
-        } catch {
-          console.log("Error", this.errorMessage);
+        } catch(e) {
+          console.log("Error", e.message);
         }
-      },
-      openNotification(position = null, color, title) {
-        const noti = this.$vs.notification({
-          flat: true,
-          progress: "auto",
-          color,
-          position,
-          title,
-          text: this.errorMessage ? this.errorMessage : `Login success`,
-        });
-      },
-    },
-  };
+        this.loading = false;
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

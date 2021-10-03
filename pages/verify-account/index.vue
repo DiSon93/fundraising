@@ -52,7 +52,7 @@
           color,
           position,
           title,
-          text: this.errorMessage ? this.errorMessage : `Register success`,
+          text: this.errorMessage ? this.errorMessage : ''
         });
       },
     },
