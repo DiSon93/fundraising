@@ -41,68 +41,68 @@
 </template>
 
 <script>
-export default {};
+  export default {};
 </script>
 
 <style lang="scss" scoped>
-@import "@asset/variables.scss";
-.feature {
-  margin-top: 30px;
-  background: rgba(251, 251, 251, 0.93);
-  border: 1px solid #e4e4e4;
-  box-sizing: border-box;
-  box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.09);
-  border-radius: 20px;
-  padding: 30px 20px;
-  width: 101.2%;
-  .list {
-    display: block;
+  @import "@asset/variables.scss";
+  .feature {
     margin-top: 30px;
-    a {
-      color: $green-black-01;
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 47px;
+    background: rgba(251, 251, 251, 0.93);
+    border: 1px solid #e4e4e4;
+    box-sizing: border-box;
+    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.09);
+    border-radius: 20px;
+    padding: 30px 20px;
+    width: 101.2%;
+    .list {
+      display: block;
+      margin-top: 30px;
+      a {
+        color: $green-black-01;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 47px;
+      }
     }
-  }
-  .content {
-    .title {
-      font-weight: bold;
-      font-size: 36px;
-      line-height: 24px;
-      text-align: center;
-      margin-bottom: 20px;
-      color: $green-black-01;
-    }
-    img {
-      margin-bottom: 20px;
-      width: 100%;
-    }
-    .text {
-      margin-bottom: 20px;
-      text-align: justify;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
-      color: $green-black-01;
-    }
-  }
-  .social_media {
-    display: flex;
-    justify-content: right;
-
-    .app {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 24px;
+    .content {
+      .title {
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: $green-black-01;
+      }
       img {
-        margin-left: 20px;
-        width: 54px;
-        height: 54px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+      .text {
+        margin-bottom: 20px;
+        text-align: justify;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $green-black-01;
+      }
+    }
+    .social_media {
+      display: flex;
+      justify-content: right;
+
+      .app {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        img {
+          margin-left: 20px;
+          width: 54px;
+          height: 54px;
+        }
       }
     }
   }
-}
 </style>
