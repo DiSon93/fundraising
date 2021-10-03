@@ -1,5 +1,6 @@
 import axiosClient from "~/utils/axiosClient";
-let currentUser = null;
+
+// let currentUser = null;
 // if (process.client) {
 //     currentUser = window.localStorage.getItem("user") ? JSON.parse(window.localStorage.getItem("user")) : "";
 // }
@@ -7,7 +8,7 @@ let currentUser = null;
 export default {
     namespaced: true,
     state: {
-        currentUser: currentUser,
+        currentUser: null,
         register: null,
         logout: null,
         error: null,
@@ -25,12 +26,8 @@ export default {
 
         },
         setUser(state, data) {
-            if(data.status == 200){
-                state.currentUser = data.results;
-                state.errorMessage = null;
-            }else{
-                state.errorMessage = data.message
-            }
+            state.currentUser = data;
+            state.errorMessage = null;
             state.error = null;
         },
         commitUser(state, data){
@@ -52,9 +49,6 @@ export default {
         registerIntoServer: ({ commit }, data) => {
             return new Promise((resolve, reject) => {
                 axiosClient({ url: '/api/auth/register', method: 'POST', data: data }).then(response => {
-                    // if(process.client){
-                    // localStorage.setItem("user", JSON.stringify(response.data));                 
-                    // }
                     commit('registerUser', response.data);
                     resolve(response.data);
                 }).catch(e => {
@@ -74,7 +68,7 @@ export default {
                     
                     resolve(response.data);
                 }).catch(e => {
-                    commit('setError', e.response.data);
+                    commit('setError', e.message);
                     reject(e);
                 })
             })
@@ -83,7 +77,7 @@ export default {
             return new Promise((resolve, reject) => {
                 axiosClient({ url: '/api/auth/logout', method: 'POST', data: data }).then(response => {
                     if (process.client && response.data.status == 200) {
-                        localStorage.removeItem("user");
+                        localStorage.removeItem("access_token");
                     }
                     commit('logoutUser', response.data);
                     resolve(response.data);

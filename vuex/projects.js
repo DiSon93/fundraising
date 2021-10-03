@@ -7,6 +7,10 @@ export default {
         register: null,
         error: null,
         errorMessage: null,
+        projectList: {
+            data: []
+        },
+        projectDetail: {}
     },
     mutations: {
         registerProject(state, data) {
@@ -25,6 +29,12 @@ export default {
            
             state.error = null;
            
+        },
+        setProjectList(state, data) {
+            state.projectList = data;
+        },
+        setProjectDetail(state, data) {
+            state.projectDetail = data;
         },
         setError(state, data) {
             state.error = data;
@@ -45,6 +55,33 @@ export default {
                 })
             })
         },
+        getProjectList: ({ commit }, data) => {
+            return new Promise((resolve, reject) => {
+                axiosClient({ url: '/api/projects', method: 'GET' }).then(response => {
+                    commit('setProjectList', response.data.results);
 
+                    resolve(response.data);
+                }).catch(e => {
+                    resolve({
+                        status: 422,
+                        message: e.message
+                    });
+                })
+            })
+        },
+        getProjectDetail: ({ commit }, projct_id) => {
+            return new Promise((resolve, reject) => {
+                axiosClient({ url: '/api/projects/' + projct_id, method: 'GET' }).then(response => {
+                    commit('setProjectDetail', response.data.results);
+
+                    resolve(response.data);
+                }).catch(e => {
+                    resolve({
+                        status: 422,
+                        message: e.message
+                    });
+                })
+            })
+        },
     }
 }
