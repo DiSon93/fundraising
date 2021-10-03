@@ -44,7 +44,7 @@
                 v-bind:class="{ adjust: activeRoute == 4 }"
               >
                 <img src="@image/icons/rewards.svg" alt="" />
-                <div class="text">Rewarts</div>
+                <div class="text">Rewards</div>
               </div>
             </NuxtLink>
             <NuxtLink to="/dashboard/account">
@@ -217,10 +217,11 @@
         window.localStorage.clear();
         window.location.reload(true);
         window.location.replace("/");
-      },
-    },
-  };
+      }
+    }
+  }
 </script>
+
 <style lang="scss" scoped>
   @import "@asset/variables.scss";
   .dashboard_layout {

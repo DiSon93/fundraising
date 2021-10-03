@@ -116,7 +116,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit("auth/commitUser", window.localStorage.getItem("user"));
+    // this.$store.commit("auth/commitUser", window.localStorage.getItem("user"));
   },
   computed: {
     ...mapState("auth", ["currentUser"]),
