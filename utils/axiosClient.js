@@ -2,19 +2,21 @@ import axios from 'axios';
 
 const axiosClient = axios.create({
     baseURL: "https://fundraisingcore.demo.fit"
-
+    // baseURL: 'http://localhost:8000'
 })
 //Tự động thêm authorization vào headers nếu có accexxToken
 axiosClient.interceptors.request.use((config) => {
     // const {accessToken} = JSON.parse(localStorage.getItem("user") || {});
-    let user = null;
-    if(process.client && localStorage.getItem("user")){
-     user = window.localStorage.getItem("user");
+    // let user = null;
+    if (process.client && localStorage.getItem("access_token")) {
+        config.headers.common.Authorization = 'Bearer ' + localStorage.getItem("access_token");
+    //  user = window.localStorage.getItem("user");
     }
-    if(user){
-        const { access_token } =JSON.parse(user);
-        config.headers.common.Authorization = `Bearer ${access_token}`;
-    }
+    // if (user){
+    //     const { access_token } =JSON.parse(user);
+    //     config.headers.common.Authorization = `Bearer ${access_token}`;
+    // }
+
     return config;
 })
 
